@@ -1,0 +1,14 @@
+<!-- application/layouts/scripts/layout.phtml -->
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PhotoAlbum</title>
+<?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+</head>
+<body>
+<div id="content">
+  <h1><?php echo $this->escape($this->title); ?></h1>
+  <?php echo $this->layout()->content; ?> </div>
+</body>
+</html>
