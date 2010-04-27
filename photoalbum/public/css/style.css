@@ -1,0 +1,98 @@
+body{ margin:15px 0px 15px 0px; padding:0px; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:10px;}
+
+#outerDIv{ width:978px; margin:0 auto;}
+#innderDiv{ width:978px; background:url(../images/center-bk.png) repeat-y; }
+#header{ background:url(../images/header.jpg) no-repeat 0px; width:960px; height:185px; margin-left:8px;}
+
+#img-top{ background:url(../images/center-top.png) no-repeat; width:978px; height:8px;}
+#contents{width:960px; height:185px; margin:10px 0px 0px 8px; padding-bottom:10px; min-height:500px; }
+#img-bottom{ background:url(../images/center-bottom.png) no-repeat; width:978px; height:8px;}
+
+
+
+#left-column{ width:200px; float:left;min-height:500px; }
+#content-main{ width:532px; margin-left:14px; float:left;min-height:500px;}
+#right-column{ width:200px; float:left;min-height:500px; margin-left:14px;}
+
+.left-col{ position:absolute; background:url(../images/col_left.png) no-repeat; width:14px; height:276px; margin:120px 0px 0px 200px;}
+.right-col{ position:absolute; background:url(../images/col_right.png) no-repeat;width:14px; height:276px; margin:120px 0px 0px 746px;}
+
+a:link {font-size: 11px; font-weight:bold; color: #009EE5;text-decoration: none;}
+a:visited {font-size: 11px; font-weight:bold; color: #009EE5; text-decoration: none;}
+a:hover { font-size: 11px; font-weight:bold; color: #009EE5; text-decoration: underline;}
+a:active { -size: 11px; font-weight:bold; color: #009EE5; text-decoration: underline;}
+
+
+h2{ color:#009EE5; margin:0px; padding:0px;}
+
+.right-align{ position:absolute; margin:30px 0px 0px 420px; }
+
+#container{ width:100%; background-color:#333333; margin:50px 0px 0px 0px; padding:10px 0px 10px 0px;}
+
+.clear{ clear:both;}
+
+
+#homeLink{ position:absolute; background:url(../images/blank.gif) repeat; width:290px; height:110px; margin:30px 0px 0px 20px; cursor:pointer;}
+
+/*  Icons Div */
+
+img{ border:none;}
+#cpanel {  text-align: center;  vertical-align: middle; }
+
+#cpanel div.icon   { margin: 3px; }
+#cpanel div.icon a { 
+	display: block; float: left;
+	height: 130px !important;
+	height: 100px; 
+	width: 148px !important;
+	width: 110px; 
+	vertical-align: middle; 
+	text-decoration : none;
+	border: 1px solid #999999;
+	padding: 2px 5px 1px 5px;
+}
+
+#cpanel div.icon a:link    {  color : #CCCCCC;  }
+#cpanel div.icon a:hover   { 
+	color : #FFFFFF; 
+	border: 1px solid #DDD;
+	padding: 3px 4px 0px 6px; 
+}
+#cpanel div.icon a:active  {  color : #CCCCCC;  }
+#cpanel div.icon a:visited {  color : #CCCCCC;  }
+
+#cpanel div.icon img { margin-top: 3px; margin-left:2px; }
+#cpanel div.icon span { display: block; padding-top: 3px;}
+
+/* For Pictures */
+#cpanel div.icon_picture   { margin: 3px; }
+#cpanel div.icon_picture a { 
+	display: block; float: left;
+	height: 125px !important;
+	height: 125px; 
+	width: 157px !important;
+	width: 157px; 
+	vertical-align: middle; 
+	text-decoration : none;
+	border: 1px solid #999999;
+	padding: 2px 5px 1px 5px;
+}
+
+#cpanel div.icon_picture a:link    { color : #CCCCCC; }
+#cpanel div.icon_picture a:hover   { 
+	color : #FFFFFF; 
+	border: 1px solid #DDD;
+	padding: 3px 4px 0px 6px; 
+}
+#cpanel div.icon_picture a:active  { color : #CCCCCC;}
+#cpanel div.icon_picture a:visited { color : #CCCCCC;}
+
+#cpanel div.icon_picture img { margin-top: 6px; margin-left:0px; }
+#cpanel div.icon_picture span { display: block; padding-top: 3px;}
+
+.transparent
+{
+   filter:alpha(opacity=60); 
+   -moz-opacity: 0.6; 
+   opacity: 0.6; 
+}

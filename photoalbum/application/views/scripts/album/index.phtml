@@ -1,0 +1,15 @@
+<h2><?php echo $this->title;?></h2>
+<div class="right-align"><a href="<?php echo $this->url(array('controller'=>'album',
+'action'=>'create'));?>">Add new album</a></div>
+<div id="container">
+  <?php if ( count($this->albums) > 0 ) {?>
+  <div id="cpanel">
+  <?php foreach($this->albums as $album) : ?>
+    <div class="icon"> <a href="#"><img src="images/gallery/1.jpg" width="140" height="110" /> <span><?php echo ucwords($album['name'])?></span></a> </div>
+    <?php endforeach; ?>
+  </div>
+  <?php }else{?>
+  No Album Found.
+  <?php }?>
+  <div class="clear"  ></div>
+</div>
