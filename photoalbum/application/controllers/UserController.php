@@ -15,19 +15,22 @@ class UserController extends Zend_Controller_Action
     }
 
     public function showAction()
-    {/*
+    {
+		if (!isset($userNamespace) && !$this->_hasParam('id')) {
+			$this->_helper->redirector('index');
+		
 		// Use default value of 1 if id is not set
-		$id = $this->_getParam('id', 1);
+		$id = $this->_getParam('id', $userNamespace->id);
 		$user = new Application_Model_DbTable_User();
 		$user = $user->getUser($id);
-		$this->view = 
-		//die(print_r($user));
-		//exit;
-		print_r($user);
+		$this->view->user = $user;
 		
 	
-		$this->view->title = $user-> "Profile";
+		$this->view->title = ($id == 2 ? 'Your' : $user['nickname']."'s")." profile";
 		$this->view->headTitle($this->view->title);
+		
+		$albums = new Application_Model_DbTable_Album();
+		$this->view->albums = $albums->fetchAll("author = ".$id)->toArray();
 		
 		
 		
@@ -37,14 +40,14 @@ class UserController extends Zend_Controller_Action
 		
 		//$this->view->albums = $user->getUser($id);
 		
-		*/
 		
 		
 		
-		$this->view->title = "Users";
-		$this->view->headTitle($this->view->title);
-		$album = new Application_Model_DbTable_User();
-		$this->view->users = $album->fetchAll()->toArray();
+		
+		//$this->view->title = "Users";
+		//$this->view->headTitle($this->view->title);
+		//$album = new Application_Model_DbTable_User();
+		//$this->view->users = $album->fetchAll()->toArray();
     }
 	
 	public function createAction()
