@@ -1,6 +1,6 @@
 <h2><?php echo $this->title;?></h2>
-<div class="right-align"><a href="<?php echo $this->url(array('controller'=>'user',
- 'action'=>'friend')); ?>">Add to friends list</a></div>
+<div class="right-align"><?php echo $this->ajaxLink("Add to friends list",
+"/user/friend", array('update' => '#left-content')); ?></div>
 <div id="container">
 	<?php echo $this->user['nickname']; ?><br />
 	<?php echo $this->user['email']; ?><br />

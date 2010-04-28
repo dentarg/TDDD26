@@ -36,6 +36,8 @@ class UserController extends Zend_Controller_Action
 		
 		$albums = new Application_Model_DbTable_Album();
 		$this->view->albums = $albums->fetchAll("author = ".$id)->toArray();
+		
+		$view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper'); //Register jquery for the view
     }
 	
 	public function createAction()
