@@ -22,15 +22,13 @@ a:visited {font-size: 11px; font-weight:bold; color: #009EE5; text-decoration: n
 a:hover { font-size: 11px; font-weight:bold; color: #009EE5; text-decoration: underline;}
 a:active { -size: 11px; font-weight:bold; color: #009EE5; text-decoration: underline;}
 
-
 h2{ color:#009EE5; margin:0px; padding:0px;}
 
 .right-align{ position:absolute; margin:30px 0px 0px 420px; }
 
-#container{ width:100%; background-color:#333333; margin:50px 0px 0px 0px; padding:10px 0px 10px 0px;}
+#container{ width:100%; margin:50px 0px 0px 0px; padding:10px 0px 10px 0px;}
 
 .clear{ clear:both;}
-
 
 #homeLink{ position:absolute; background:url(../images/blank.gif) repeat; width:290px; height:110px; margin:30px 0px 0px 20px; cursor:pointer;}
 
@@ -49,6 +47,7 @@ img{ border:none;}
 	vertical-align: middle; 
 	text-decoration : none;
 	border: 1px solid #999999;
+	margin:5px;
 	padding: 2px 5px 1px 5px;
 }
 
