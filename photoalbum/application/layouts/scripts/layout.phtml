@@ -1,14 +1,30 @@
-<!-- application/layouts/scripts/layout.phtml -->
-<?php echo $this->doctype() ?>
+<?php ini_set('display_errors',1); ?>
+<?php echo $this->doctype(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>PhotoAlbum</title>
-<?php echo $this->headLink()->appendStylesheet('/css/global.css') ?>
+<title>PhotoAlbum </title>
+<?php //echo $this->headLink()->appendStylesheet('css/style.css') ?>
+<link rel="stylesheet" type="text/css" media="screen" href="<?=$this->baseUrl();?>/css/style.css" />
+<?php echo $this->jQuery(); ?>
 </head>
 <body>
-<div id="content">
-  <h1><?php echo $this->escape($this->title); ?></h1>
-  <?php echo $this->layout()->content; ?> </div>
+<?php //echo $this->baseUrl();?>
+<div id="outerDIv">
+  <div id="img-top"></div>
+  <div id="innderDiv">
+    <div id="header">
+    <div id="homeLink" class="transparent" onClick="window.location='<?=$this->baseUrl();?>';" ></div>
+	</div>
+    <div id="contents">
+      <div id="left-column"></div>
+      <div class="left-col"></div>
+      <div id="content-main"><?php echo $this->layout()->content; ?></div>
+      <div class="right-col"></div>
+      <div id="right-column"></div>
+    </div>
+  </div>
+  <div id="img-bottom"></div>
+</div>
 </body>
 </html>

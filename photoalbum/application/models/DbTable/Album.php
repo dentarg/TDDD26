@@ -37,5 +37,14 @@ class Application_Model_DbTable_Album extends Zend_Db_Table_Abstract
     {
         $this->delete('id =' . (int)$id);
     }
+	
+/*	public function fetchAll($where, $order ='')
+    {
+
+		$select = $table->select();
+
+		$select->where('bug_status = ?', 'NEW');
+    }
+*/
 }
 ?>
