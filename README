@@ -38,3 +38,4 @@ update
 show (user profile)
 index (users list)
 login
+friend
