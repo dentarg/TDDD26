@@ -38,13 +38,15 @@ class Application_Model_DbTable_Album extends Zend_Db_Table_Abstract
         $this->delete('id =' . (int)$id);
     }
 	
-/*	public function fetchAll($where, $order ='')
+	public function fetchAll_C( $where= '', $order = '' )
     {
+		$select = $this->_db->select()
+		->from(array('a'=>'album'),array('a.id','a.name','a.author'))
+		->joinLeft(array('p'=>'photo'),'p.album=a.id',array('p.picture as cover'));
 
-		$select = $table->select();
-
-		$select->where('bug_status = ?', 'NEW');
+		$results = $this->getAdapter()->fetchAll($select);
+		
+		return($results);
     }
-*/
 }
 ?>
