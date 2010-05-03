@@ -4,8 +4,13 @@
 <div id="container">
   <?php if ( count($this->albums) > 0 ) {?>
   <div id="cpanel">
-  <?php foreach($this->albums as $album) : ?>
-    <div class="icon"> <a href="#"><img src="images/gallery/1.jpg" width="140" height="110" /> <span><?php echo ucwords($album['name'])?></span></a> </div>
+    <?php foreach($this->albums as $album) : ?>
+    <?php 
+		$cover = ($album['cover']) ? $album['cover'] : 'noimage.png' ;
+	?>
+    <div class="icon">
+    <a href="<?=$this->baseUrl();?>/photo?album=<?php echo $album['id'];?>"> <img src="phpthumb/phpThumb.php?src=../images/gallery/<?php echo $cover;?>&w=140&h=110" /> <span><?php echo ucwords($album['name'])?></span></a>
+    </div>
     <?php endforeach; ?>
   </div>
   <?php }else{?>

@@ -1,8 +1,6 @@
 <?php
-
 class AlbumController extends Zend_Controller_Action
 {
-
     public function init()
     {
         /* Initialize action controller here */
@@ -13,7 +11,9 @@ class AlbumController extends Zend_Controller_Action
 		$this->view->title = "Albums";
 		$this->view->headTitle($this->view->title);
 		$album = new Application_Model_DbTable_Album();
-		$this->view->albums = $album->fetchAll()->toArray();
+		//$this->view->albums = $album->fetchAll()->toArray();
+		
+		$this->view->albums = $album->fetchAll_C();
 		
 		//Album page
     }
@@ -33,10 +33,10 @@ class AlbumController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			if ($form->isValid($formData)) 
 			{
-				$artist = $form->getValue('artist');
+				$author = '1';
 				$title = $form->getValue('title');
 				$albums = new Application_Model_DbTable_Album();
-				$albums->addAlbum($artist, $title);
+				$albums->addAlbum($author, $title);
 				$this->_helper->redirector('index');
 			} 
 			else 

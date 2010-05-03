@@ -2,16 +2,6 @@
 class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 {
     protected $_name = 'user';
-	
-	public function getName($id)
-	{/*
-        $id = (int)$id;
-        $row = $this->fetchRow('id = ' . $id);
-        if (!$row) {
-            throw new Exception("Count not find row $id");
-        }
-		*/
-	}
     
     public function getUser($id) 
     {

@@ -5,8 +5,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>PhotoAlbum </title>
 <?php //echo $this->headLink()->appendStylesheet('css/style.css') ?>
-<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $this->baseUrl();?>/css/style.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?=$this->baseUrl();?>/css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.lightbox-0.5.css" media="screen" />
+
 <?php echo $this->jQuery(); ?>
+<script type="text/javascript" src="js/jquery.lightbox-0.5.pack.js"></script>
+
 </head>
 <body>
 <?php //echo $this->baseUrl();?>
@@ -14,7 +18,7 @@
   <div id="img-top"></div>
   <div id="innderDiv">
     <div id="header">
-    <div id="homeLink" class="transparent" onClick="window.location='<?php echo $this->baseUrl();?>';" ></div>
+    <div id="homeLink" class="transparent" onClick="window.location='<?=$this->baseUrl();?>';" ></div>
 	</div>
     <div id="contents">
       <div id="left-column"></div>

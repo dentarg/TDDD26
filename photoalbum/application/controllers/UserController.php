@@ -11,7 +11,6 @@ class UserController extends Zend_Controller_Action
     public function indexAction()
     {
 		//User list
-		echo 'asfdgsja';
     }
 
     public function showAction()
