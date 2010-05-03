@@ -11,7 +11,7 @@ body{ margin:15px 0px 15px 0px; padding:0px; font-family:Verdana, Arial, Helveti
 
 
 #left-column{ width:200px; float:left;min-height:500px; }
-#content-main{ width:532px; margin-left:14px; float:left;min-height:500px;}
+#content-main{ width:532px; margin-left:14px; float:left;min-height:500px; padding-bottom:20px;}
 #right-column{ width:200px; float:left;min-height:500px; margin-left:14px;}
 
 .left-col{ position:absolute; background:url(../images/col_left.png) no-repeat; width:14px; height:276px; margin:120px 0px 0px 200px;}
