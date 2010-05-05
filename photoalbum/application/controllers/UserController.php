@@ -15,12 +15,13 @@ class UserController extends Zend_Controller_Action
 
     public function showAction()
     {
+		$userNamespace = new Zend_Session_Namespace('Zend_Auth'); //For debugging reasons...
+		$userNamespace->id = 1;
+	
 		//If user is not logged in and he didn't specified id of the user he wants to view then he is redirected to
 		//index page. It's temp. redirect page can be changed in the future or it can throw an error
 		if (!isset($userNamespace) && !$this->_hasParam('id')) {
 			$this->_helper->redirector('index');
-			//$userNamespace = new Zend_Session_Namespace('Zend_Auth'); //For debugging reasons...
-			//$userNamespace->id = 2;
 		}
 		
 		// Use default value of current user if id is not set
@@ -29,12 +30,29 @@ class UserController extends Zend_Controller_Action
 		$user = $user->getUser($id);
 		$this->view->user = $user;
 		
+		$my_profile = $id == $userNamespace->id;
+		$this->view->my_profile = $my_profile;
+		
 		//Title "user's profile" or "your profile"
-		$this->view->title = ($id == $userNamespace->id ? 'Your' : $user['nickname']."'s")." profile";
+		$this->view->title = ($my_profile ? 'Your' : $user['nickname']."'s")." profile";
 		$this->view->headTitle($this->view->title);
 		
-		$albums = new Application_Model_DbTable_Album();
-		$this->view->albums = $albums->fetchAll("author = ".$id)->toArray();
+		
+		$albumModel = new Application_Model_DbTable_Album();
+		$covers = new Application_Model_DbTable_Photo();
+		
+		$albums = $albumModel->fetchAll("author = ".$id)->toArray();
+		/*$condition = "album = ".$albums[0];
+		$i = 0;
+		foreach($albums as $album)
+		{
+			if($i++ == 0) continue;
+			$condition .= ' and album = '.$album['id'];
+		}
+		$cover[] = $covers->fetchAll($condition)->toArray();
+		
+		$this->view->covers = $covers;*/
+		$this->view->albums = $albums;
 		
 		$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper'); //Register jquery for the view
     }
@@ -46,7 +64,14 @@ class UserController extends Zend_Controller_Action
 	
 	public function loginAction()
 	{
-		//Login
+		if(!isset($userNamespace) && $this->_postParam('login'))
+		{
+			//Implement login action here
+			$this->_helper->redirector('show');
+		}
+		elseif(isset($userNamespace) && $this->_postParam('logout')) {}
+			//Implement logout action here
+		$this->_helper->redirector('index');
 	}
 	
 	public function updateAction()

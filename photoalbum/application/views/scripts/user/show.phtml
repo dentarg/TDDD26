@@ -1,14 +1,23 @@
 <h2><?php echo $this->title;?></h2>
+<?php echo $this->user['email']; ?>
 
-<div class="right-align"><?php echo $this->ajaxLink("Add to friends list",
-"/user/friend", array('update' => '#left-content')); ?></div>
+<?php if($this->my_profile): ?>
+<div class="right-align">
+<a href="<?php echo $this->url(array('controller'=>'album',
+'action'=>'create'));?>" onclick="alert('This link will direct you to the album creation page in the future'); return false;">Create album</a>
+</div>
+<?php endif; ?>
+
+
 <div id="container">
 	
   <?php if ( count($this->albums) > 0 ) {?>
   <div id="cpanel">
-    <?php foreach($this->albums as $album) : ?>
+    <?php $i = 0; foreach($this->albums as $album) : ?>
     <div class="icon">
-        <a href="#"><img src="../images/gallery/1.jpg" width="140" height="110" />
+        <a href="<?php echo $this->url(array('controller'=>'album',
+'action'=>'show'));?>?id=<?php echo $album['id']; ?>" onclick="alert('This is link to the album view'); return false;">
+<img src="../images/gallery/1.jpg<?php //echo $this->covers[0]['picture']; ?>" width="140" height="110" />
         <span><?php echo ucwords($albums['title'])?></span></a>
     </div>
     <?php endforeach; ?>
@@ -21,6 +30,3 @@
     
   <div class="clear"  ></div>
 </div>
-
-
-<h2>Friends list</h2>
