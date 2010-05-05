@@ -60,6 +60,31 @@ class UserController extends Zend_Controller_Action
 	public function createAction()
 	{
 		//Sign up
+		$this->view->title = "User registration";
+		$this->view->headTitle($this->view->title);
+
+		$form = new Application_Form_User();
+		$form->submit->setLabel('Add');
+
+		$this->view->form = $form;
+
+		if ($this->getRequest()->isPost()) 
+		{
+			$formData = $this->getRequest()->getPost();
+			if ($form->isValid($formData)) 
+			{
+				$email = $form->getValue('email');
+				$nickname = $form->getValue('nickname');
+				$password = $form->getValue('password');
+				$users = new Application_Model_DbTable_User();
+				$users->addUser($email, $password, $nickname);
+				$this->_helper->redirector('show');
+			} 
+			else 
+			{
+				$form->populate($formData);
+			}
+		}		
 	}
 	
 	public function loginAction()

@@ -1,3 +1,6 @@
+<img src="http://github.com/dentarg/TDDD26/raw/master/user-case.png" alt="user-case.png" />
+
+
 User, Album, Photo
 
 
