@@ -46,6 +46,22 @@ class AlbumController extends Zend_Controller_Action
 		}
 	}
 	
+	public function showAction()
+	{	
+		if($this->_hasParam('id'))
+		{
+			$id = $this->_getParam('id');
+			$album = new Application_Model_DbTable_Album();
+			$album = $album->getAlbum($id);
+			$user = new Application_Model_DbTable_User();
+			$user = $user->getUser($album['author']);
+			$this->view->title = '<a href="'.$this->view->url(array('controller'=>'user',
+	'show'=>'create')).'?id='.$album['author'].'">'.$user['nickname'].'</a> > '.$album['name'];
+		}
+		else
+			$this->view->title = 'Album id is not specified';
+	}
+	
 	public function updateAction()
 	{
 		//Updating album

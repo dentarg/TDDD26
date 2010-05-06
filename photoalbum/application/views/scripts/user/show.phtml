@@ -19,7 +19,7 @@
         <a href="<?php echo $this->url(array('controller'=>'album',
 'action'=>'show'));?>?id=<?php echo $album['id']; ?>" onclick="alert('This is link to the album view'); return false;">
 <img src="../images/gallery/1.jpg<?php //echo $this->covers[0]['picture']; ?>" width="140" height="110" />
-        <span><?php echo ucwords($albums['title'])?></span></a>
+        <span><?php echo ucwords($album['name'])?></span></a>
     </div>
     <?php endforeach; ?>
   </div>
