@@ -7,7 +7,8 @@
 		$cover = ($album['cover']) ? $album['cover'] : 'noimage.png' ;
 	?>
     <div class="icon">
-    <a href="<?php echo $this->baseUrl(); ?>/album/show?id=<?php echo $album['id'];?>"> <img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $album['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($album['name'])?></span></a>
+    <a href="<?php echo $this->url(array('controller'=>'album',
+'action'=>'show'));?>?id=<?php echo $album['id'];?>"> <img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $album['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($album['name'])?></span></a>
     </div>
     <?php endforeach; ?>
   </div>

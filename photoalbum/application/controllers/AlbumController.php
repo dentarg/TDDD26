@@ -73,6 +73,11 @@ class AlbumController extends Zend_Controller_Action
 			$user = $user->getUser($album['author']);
 			$this->view->title = '<a href="'.$this->view->url(array('controller'=>'user',
 	'show'=>'create')).'?id='.$album['author'].'">'.$user['nickname'].'</a> > '.$album['name'];
+	
+		
+			$albumPhoto = new Application_Model_DbTable_Photo();
+			$this->view->albumPhoto = $albumPhoto->fetchAll("album = ".$id)->toArray();
+	
 		}
 		else
 			$this->view->title = 'Album id is not specified';
