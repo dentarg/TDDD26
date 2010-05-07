@@ -24,45 +24,53 @@
       <div id="content-main"><?php echo $this->layout()->content; ?></div>
       <div class="right-col"></div>
       <div id="right-column">
-	  
+	 
 <?php
+$auth = Zend_Auth::getInstance();
+if ($auth->hasIdentity()):
+?>
+
+    <a href="<?php echo $this->baseUrl(); ?>/user/show">My profile</a><br />
+    <br />
+
+    <a href="<?php echo $this->baseUrl(); ?>/user/logout">Log out</a><br />
+    <br />
+
+    <?php
+
+else:
+
 	$form = new Zend_Form;
     $form->setAction($this->baseUrl().'/user/login')
 		 ->setMethod('post');
-		 
-	if($this->registered) //Change this value to some other to check if user is logged in
-	{
-		$form->addElement('submit', 'logout', array('label' => 'Logout'));
-	}
-	else
-	{
-		$username = $form->createElement('text', 'email');
-		$username->addValidator('alnum')
-				 ->addValidator('regex', false, array('/^[a-z]+/'))
-				 ->addValidator('stringLength', false, array(6, 20))
-				 ->setRequired(true)
-				 ->setLabel('Username')
-				 ->addFilter('StringToLower');
-
-		$password = $form->createElement('password', 'password');
-		$password->addValidator('StringLength', false, array(6))
-				 ->setRequired(true)
-				 ->setLabel('Password');
-
-		$form->addElement($username)
-			 ->addElement($password)
-			 ->addElement('submit', 'login', array('label' => 'Login'));
-	}
-		 
+    
+    $username = $form->createElement('text', 'email');
+    $username->addValidator('alnum')
+    		 ->addValidator('regex', false, array('/^[a-z]+/'))
+    		 ->addValidator('stringLength', false, array(6, 20))
+    		 ->setRequired(true)
+    		 ->setLabel('Email')
+    		 ->addFilter('StringToLower');
+    
+    $password = $form->createElement('password', 'password');
+    $password->addValidator('StringLength', false, array(6))
+    		 ->setRequired(true)
+    		 ->setLabel('Password');
+    
+    $form->addElement($username)
+    	 ->addElement($password)
+    	 ->addElement('submit', 'login', array('label' => 'Login'));
+    
 	echo $form;
 
-?><br />
-<?php if(!isset($userNamespace)): ?>
+    ?><br />
+
 	<a href="<?php echo $this->baseUrl(); ?>/user/create">Sing up</a><br />
 	<br />
+
 <?php endif; ?>
-	
-	<a href="<?php echo $this->baseUrl(); ?>/user" onclick="alert('User list will be here'); return false;">User list</a>
+
+<a href="<?php echo $this->baseUrl(); ?>/user" onclick="alert('User list will be here'); return false;">User list</a>
 	  </div>
     </div>
     <div class="clear"></div>

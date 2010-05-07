@@ -25,7 +25,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
     {
         $data = array(
             'email' => $email,
-			'password' => md5('adsfhd'.$password.'[]wrg[o5,b30'),
+			'password' => md5($password),
 			'nickname' => $nickname,
         );
         $this->insert($data);
