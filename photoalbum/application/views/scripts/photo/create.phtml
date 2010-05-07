@@ -1,0 +1,8 @@
+<h2><?php echo $this->title;?></h2>
+
+<div class="right-align"><a href="<?php echo $this->url(array('album'=>$this->album['id'],'controller'=>'photo',
+'action'=>'show'));?>">Back</a></div>
+
+<div id="container">
+<?php echo $this->form ;?>
+</div>
