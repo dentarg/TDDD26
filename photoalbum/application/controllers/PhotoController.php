@@ -101,6 +101,12 @@ class PhotoController extends Zend_Controller_Action
 		//Updating picture
 	}
 	
+	public function downloadAction()
+	{
+		$this->_helper->layout->disableLayout();
+		$this->view->imageFile = $this->getRequest()->getParam('imagefile');
+	}
+	
 	public function deleteAction()
 	{
 		$picid = $this->getRequest()->getParam('pic');

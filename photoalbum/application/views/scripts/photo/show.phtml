@@ -16,11 +16,13 @@ function settitle(thisEle)
 {
 	$(thisEle).attr('title', '<a href="#">Download</a>');
 	$(thisEle).children(".dPhoto").css("display", "none");
+	$(thisEle).children(".dPhotoDelete").css("display", "none");
 }
 function removetitle(thisEle)
 {
 	$(thisEle).attr('title', '');
 	$(thisEle).children(".dPhoto").css("display", "block");
+	$(thisEle).children(".dPhotoDelete").css("display", "block");
 }
 
 function removeHref(DivEle)
@@ -45,9 +47,18 @@ function setHref(DivEle, hrefValue)
 
 function deletePic( albumId, picId  )
 {
+	setTimeout('$( "#jquery-overlay" ).click()', 0);
 	 URL = baseURL+'/photo/delete/pic/'+picId+'/album/'+albumId;
 	window.location = URL;
 }
+
+function Imagedownload (frmId, url)
+{
+	oIFrm = document.getElementById(frmId);
+	oIFrm.src = url;
+	setTimeout('$( "#jquery-overlay" ).click()', 0);
+}
+
 </script>
 <h2><?php echo $this->title;?></h2>
 <div class="left-align">
@@ -61,11 +72,13 @@ function deletePic( albumId, picId  )
   <div id="cpanel">
     <?php foreach($this->albumPhoto as $photo) : ?>
     <?php 
-		//$cover = ($album['cover']) ? $album['picture'] : 'noimage.png' ;
+		$myURL = $this->url( array('controller'=>'photo','action'=>'download') );
 	?>
     <div class="icon">
-    <a onmouseout="settitle(this);" onclick="settitle(this);" title="<a href='#'>Download</a>" onmouseover="removetitle(this);" href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span>
+    <a onmouseout="settitle(this);" onclick="settitle(this);" title="<?php //echo $title;?>" onmouseover="removetitle(this);" href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span>
     <div class="dPhoto" onclick="deletePic('<?php echo $this->album['id'];?>', '<?php echo $photo['id'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Delete</div>
+    <div class="dPhotoDelete" onclick="Imagedownload('<?php echo "myIFrm_".$photo['id'];?>', '<?php echo $myURL.'?imagefile='.$photo['picture'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Download</div>
+    <iframe id="myIFrm_<?php echo $photo['id'];?>" src="" style="visibility:hidden;"></iframe>
     </a>
     </div>
     <?php endforeach; ?>
