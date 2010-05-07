@@ -72,13 +72,16 @@ class UserController extends Zend_Controller_Action
 				$nickname = $form->getValue('nickname');
 				$password = $form->getValue('password');
 				$users = new Application_Model_DbTable_User();
-				$users->addUser($email, $password, $nickname);
-				$this->_helper->redirector('show');
-			} 
-			else 
-			{
-				$form->populate($formData);
+				$existing = count($users->fetchAll("email = '".$email."'")->toArray());
+				if($existing)
+					$this->view->form->email->addError("Email already exists");
+				else
+				{
+					$users->addUser($email, $password, $nickname);
+					$this->_helper->redirector('show');
+				}
 			}
+			$form->populate($formData);
 		}		
 	}
 	
