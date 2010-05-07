@@ -16,7 +16,7 @@ class AlbumController extends Zend_Controller_Action
 		$select->setIntegrityCheck(false)
 			   ->joinLeft('photo', 'photo.id = album.cover', 'photo.picture')
 			   ->order('album.date DESC')
-			   ->limit(6, 0);
+			   ->limit(20, 0);
 		
 		$this->view->albums = $album->fetchAll($select);
 	   
