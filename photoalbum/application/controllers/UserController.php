@@ -15,41 +15,48 @@ class UserController extends Zend_Controller_Action
 
     public function showAction() 
     {
-		$userNamespace = new Zend_Session_Namespace('Zend_Auth'); //For debugging reasons...
-		$userNamespace->id = 2;
+       
+//		$userNamespace = new Zend_Session_Namespace('Zend_Auth'); //For debugging reasons...
+//		$userNamespace->id = 2;
+		
+		// from http://framework.zend.com/manual/en/zend.auth.introduction.html
+      $auth = Zend_Auth::getInstance();
+      if ($auth->hasIdentity()) {
+         // Identity exists; get it
+         $identity = $auth->getIdentity();
+         
+   		// Use default value of current user if id is not set
+   		$id = $this->_getParam('id', $userNamespace->id);
+   		$user = new Application_Model_DbTable_User();
+   		$user = $user->getUserByEmail($identity); // $user = $user->getUser($id);
+   		$this->view->user = $user;
+
+   		$my_profile = $id == $userNamespace->id;
+   		$this->view->my_profile = $my_profile;
+
+   		//Title "user's profile" or "your profile"
+   		$this->view->title = ($my_profile ? 'Your' : $user['nickname']."'s")." profile";
+   		$this->view->headTitle($this->view->title);
+/*
+   		$album = new Application_Model_DbTable_Album();
+   		$select = $album->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
+   		$select->setIntegrityCheck(false)
+   			   ->joinLeft('photo', 'photo.id = album.cover', 'photo.picture')
+   			   ->order('album.date DESC')
+   			   ->where("author = ".$id);
+   		$this->view->albums = $album->fetchAll($select)->toArray();
+*/
+   		$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper'); //Register jquery for the view         
+      }		
 	
+/*	
 		//If user is not logged in and he didn't specified id of the user he wants to view then he is redirected to
 		//index page. It's temp. redirect page can be changed in the future or it can throw an error
 		if (!isset($userNamespace) && !$this->_hasParam('id')) {
 			$this->_helper->redirector('index');
 		}
-		
-		// Use default value of current user if id is not set
-		$id = $this->_getParam('id', $userNamespace->id);
-		$user = new Application_Model_DbTable_User();
-		$user = $user->getUser($id);
-		$this->view->user = $user;
-		
-		$my_profile = $id == $userNamespace->id;
-		$this->view->my_profile = $my_profile;
-		
-		//Title "user's profile" or "your profile"
-		$this->view->title = ($my_profile ? 'Your' : $user['nickname']."'s")." profile";
-		$this->view->headTitle($this->view->title);
-		
-		
-		$album = new Application_Model_DbTable_Album();
-		
-		
-		$select = $album->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
-		$select->setIntegrityCheck(false)
-			   ->joinLeft('photo', 'photo.id = album.cover', 'photo.picture')
-			   ->order('album.date DESC')
-			   ->where("author = ".$id);
-		
-		$this->view->albums = $album->fetchAll($select)->toArray();
-		
-		$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper'); //Register jquery for the view
+*/
+		echo "Not logged in.";
     }
 	
 	public function createAction()
@@ -85,7 +92,7 @@ class UserController extends Zend_Controller_Action
 	public function loginAction()
 	{
 	   // from http://framework.zend.com/manual/en/zend.db.adapter.html
-      $db = new Zend_Db_Adapter_Pdo_Mysql(array(
+      $dbAdapter = new Zend_Db_Adapter_Pdo_Mysql(array(
          'host'     => '127.0.0.1',
          'username' => 'tddd26',
          'password' => '123123',
@@ -108,6 +115,8 @@ class UserController extends Zend_Controller_Action
           ->setCredential($password);
 
        // from http://framework.zend.com/manual/en/zend.auth.introduction.html
+       // Get a reference to the singleton instance of Zend_Auth
+       $auth = Zend_Auth::getInstance();
        // Attempt authentication, saving the result
        $result = $auth->authenticate($authAdapter);
        if (!$result->isValid()) {

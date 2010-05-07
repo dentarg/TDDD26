@@ -12,6 +12,14 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
         }
         return $row->toArray();    
     }
+    public function getUserByEmail($email) 
+    {
+        $row = $this->fetchRow("email = '" . $email . "'");
+        if (!$row) {
+            throw new Exception("Count not find row $email");
+        }
+        return $row->toArray();    
+    }    
     
     public function addUser($email, $password, $nickname)
     {
