@@ -38,7 +38,7 @@
 	}
 	else
 	{
-		$username = $form->createElement('text', 'username');
+		$username = $form->createElement('text', 'email');
 		$username->addValidator('alnum')
 				 ->addValidator('regex', false, array('/^[a-z]+/'))
 				 ->addValidator('stringLength', false, array(6, 20))
