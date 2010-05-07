@@ -15,10 +15,13 @@
   <?php if ( count($this->albums) > 0 ) {?>
   <div id="cpanel">
     <?php $i = 0; foreach($this->albums as $album) : ?>
+    <?php 
+		$cover = ($album['picture']) ? $album['picture'] : 'noimage.png' ;
+	?>
     <div class="icon">
         <a href="<?php echo $this->url(array('controller'=>'album',
 'action'=>'show'));?>?id=<?php echo $album['id']; ?>">
-<img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $album['picture'];?>&w=140&h=110" width="140" height="110" />
+<img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $cover;?>&w=140&h=110" width="140" height="110" />
         <span><?php echo ucwords($album['name'])?></span></a>
     </div>
     <?php endforeach; ?>
