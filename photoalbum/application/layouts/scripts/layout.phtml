@@ -6,10 +6,10 @@
 <title>PhotoAlbum </title>
 <?php //echo $this->headLink()->appendStylesheet('css/style.css') ?>
 <link rel="stylesheet" type="text/css" media="screen" href="<?=$this->baseUrl();?>/css/style.css" />
-<link rel="stylesheet" type="text/css" href="css/jquery.lightbox-0.5.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="<?=$this->baseUrl();?>/css/jquery.lightbox-0.5.css" media="screen" />
 
 <?php echo $this->jQuery(); ?>
-<script type="text/javascript" src="js/jquery.lightbox-0.5.pack.js"></script>
+<script type="text/javascript" src="<?=$this->baseUrl();?>/js/jquery.lightbox-0.5.pack.js"></script>
 
 </head>
 <body>
@@ -62,7 +62,7 @@
 	<br />
 <?php endif; ?>
 	
-	<a href="<?php echo $this->baseUrl(); ?>/user" onclick="alert('User list will be here'); return false;">User list</a>
+	<a href="<?php echo $this->baseUrl(); ?>/user" onClick="alert('User list will be here'); return false;">User list</a>
 	  </div>
     </div>
     <div class="clear"></div>

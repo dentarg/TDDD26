@@ -95,3 +95,11 @@ img{ border:none;}
    -moz-opacity: 0.6; 
    opacity: 0.6; 
 }
+
+#title-label label{ font-weight:bold; font-size:12px;}
+
+.manage{ position:absolute; width:160px; margin:-8px 0px 0px 8px;}
+.float-left{ float:left;}
+.float-right{float:right;}
+
+.dPhoto{ position:absolute; z-index:100px;margin-top:-137px; cursor:default; display:none;}

@@ -90,7 +90,15 @@ class AlbumController extends Zend_Controller_Action
 	
 	public function deleteAction()
 	{
-		//Deleting album and all pictures which belong to it
+		$albumId = $this->getRequest()->getParam('album');
+		if ($albumId)
+		{
+			$albumModel = new Application_Model_DbTable_Album();
+			$albumModel->deleteAlbum($albumId);
+			
+		}	
+		$this->_helper->redirector('index');
+			//Deleting album and all pictures which belong to it
 	}
 }
 
