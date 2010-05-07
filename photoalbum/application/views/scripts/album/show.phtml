@@ -15,10 +15,10 @@ $(function() {
   <div id="cpanel">
     <?php foreach($this->albumPhoto as $photo) : ?>
     <?php 
-		//$cover = ($album['cover']) ? $album['picture'] : 'noimage.png' ;
+		$cover = ($album['picture']) ? $album['picture'] : 'noimage.png' ;
 	?>
     <div class="icon">
-    <a href="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span></a>
+    <a href="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $cover;?>&w=800&h=600"> <img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span></a>
     </div>
     <?php endforeach; ?>
   </div>
