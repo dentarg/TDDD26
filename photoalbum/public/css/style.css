@@ -8,14 +8,14 @@ body{ margin:15px 0px 15px 0px; padding:0px; font-family:Verdana, Arial, Helveti
 #contents{width:960px; height:185px; margin:10px 0px 0px 8px; padding-bottom:10px; min-height:500px; }
 #img-bottom{ background:url(../images/center-bottom.png) no-repeat; width:978px; height:8px;}
 
+form dt { margin-left: 10px; margin-top: 10px;}
+form dd { margin-left: 10px;}
 
 
-#left-column{ width:200px; float:left;min-height:500px; }
-#content-main{ width:532px; margin-left:14px; float:left;min-height:500px; padding-bottom:20px;}
+#content-main{ width:732px; margin-left:14px; float:left;min-height:500px; padding-bottom:20px; overflow: hidden; position: relative;}
 #right-column{ width:200px; float:left;min-height:500px; margin-left:14px;}
 
-.left-col{ position:absolute; background:url(../images/col_left.png) no-repeat; width:14px; height:276px; margin:120px 0px 0px 200px;}
-.right-col{ position:absolute; background:url(../images/col_right.png) no-repeat;width:14px; height:276px; margin:120px 0px 0px 746px;}
+.right-col{ position:absolute; background:url(../images/col_right.png) no-repeat;width:14px; height:276px; margin:120px 0px 0px 736px;}
 
 a:link {font-size: 11px; font-weight:bold; color: #009EE5;text-decoration: none;}
 a:visited {font-size: 11px; font-weight:bold; color: #009EE5; text-decoration: none;}
@@ -24,7 +24,7 @@ a:active { -size: 11px; font-weight:bold; color: #009EE5; text-decoration: under
 
 h2{ color:#009EE5; margin:0px; padding:0px;}
 
-.right-align{ position:absolute; margin:30px 0px 0px 420px; }
+.right-align{ right: 30px; position: absolute;}
 
 #container{ width:100%; margin:50px 0px 0px 0px; padding:10px 0px 10px 0px;}
 
