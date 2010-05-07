@@ -12,7 +12,7 @@ form dt { margin-left: 10px; margin-top: 10px;}
 form dd { margin-left: 10px;}
 
 
-#content-main{ width:732px; margin-left:14px; float:left;min-height:500px; padding-bottom:20px; overflow: hidden; position: relative;}
+#content-main{ width:732px; margin-left:14px; float:left;min-height:500px; padding-bottom:20px; overflow: auto; position: relative;}
 #right-column{ width:200px; float:left;min-height:500px; margin-left:14px;}
 
 .right-col{ position:absolute; background:url(../images/col_right.png) no-repeat;width:14px; height:276px; margin:120px 0px 0px 736px;}
