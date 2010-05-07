@@ -1,1 +1,29 @@
+<script type="text/javascript">
+$(function() {
+	$('#cpanel a').lightBox();
+});
+</script>
 <div id="breadcrumbs"><?php echo $this->title;?></div>
+
+
+<div class="right-align"><a href="<?php echo $this->url(array('controller'=>'album',
+'action'=>'update'));?>?id=<?php echo $this->album['id']; ?>" onclick="alert('This link will direct you to album editor page'); return false;">Edit album</a></div>
+
+
+<div id="container">
+  <?php if ( count($this->albumPhoto) > 0 ) {?>
+  <div id="cpanel">
+    <?php foreach($this->albumPhoto as $photo) : ?>
+    <?php 
+		$cover = ($photo['picture']) ? $photo['picture'] : 'noimage.png' ;
+	?>
+    <div class="icon">
+    <a href="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $cover;?>&w=800&h=600"> <img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span></a>
+    </div>
+    <?php endforeach; ?>
+  </div>
+  <?php }else{?>
+  No Photo Found.
+  <?php }?>
+  <div class="clear"  ></div>
+</div>

@@ -38,21 +38,16 @@ class UserController extends Zend_Controller_Action
 		$this->view->headTitle($this->view->title);
 		
 		
-		$albumModel = new Application_Model_DbTable_Album();
-		$covers = new Application_Model_DbTable_Photo();
+		$album = new Application_Model_DbTable_Album();
 		
-		$albums = $albumModel->fetchAll("author = ".$id)->toArray();
-		/*$condition = "album = ".$albums[0];
-		$i = 0;
-		foreach($albums as $album)
-		{
-			if($i++ == 0) continue;
-			$condition .= ' and album = '.$album['id'];
-		}
-		$cover[] = $covers->fetchAll($condition)->toArray();
 		
-		$this->view->covers = $covers;*/
-		$this->view->albums = $albums;
+		$select = $album->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
+		$select->setIntegrityCheck(false)
+			   ->joinLeft('photo', 'photo.id = album.cover', 'photo.picture')
+			   ->order('album.date DESC')
+			   ->where("author = ".$id);
+		
+		$this->view->albums = $album->fetchAll($select)->toArray();
 		
 		$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper'); //Register jquery for the view
     }

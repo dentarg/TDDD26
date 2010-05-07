@@ -8,12 +8,28 @@ class AlbumController extends Zend_Controller_Action
 
     public function indexAction()
     {
-		$this->view->title = "Albums";
+		$this->view->title = "Recently added albums";
 		$this->view->headTitle($this->view->title);
 		$album = new Application_Model_DbTable_Album();
+
+		$select = $album->select(Zend_Db_Table::SELECT_WITH_FROM_PART);
+		$select->setIntegrityCheck(false)
+			   ->joinLeft('photo', 'photo.id = album.cover', 'photo.picture')
+			   ->order('album.date DESC')
+			   ->limit(20, 0);
+		
+		$this->view->albums = $album->fetchAll($select);
+	   
+		//$rows = $table->fetchAll($select);
+		
+		
+		
+		//$album->select()
+													 //->join('photo', 'photo.id = album.cover')
+		//);
 		//$this->view->albums = $album->fetchAll()->toArray();
 		
-		$this->view->albums = $album->fetchAll_C();
+		//$this->view->albums = $album->fetchAll_C();
 		
 		//Album page
     }
@@ -57,6 +73,11 @@ class AlbumController extends Zend_Controller_Action
 			$user = $user->getUser($album['author']);
 			$this->view->title = '<a href="'.$this->view->url(array('controller'=>'user',
 	'show'=>'create')).'?id='.$album['author'].'">'.$user['nickname'].'</a> > '.$album['name'];
+	
+		
+			$albumPhoto = new Application_Model_DbTable_Photo();
+			$this->view->albumPhoto = $albumPhoto->fetchAll("album = ".$id)->toArray();
+	
 		}
 		else
 			$this->view->title = 'Album id is not specified';

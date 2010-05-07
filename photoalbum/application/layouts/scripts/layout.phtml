@@ -21,8 +21,6 @@
     <div id="homeLink" class="transparent" onClick="window.location='<?=$this->baseUrl();?>';" ></div>
 	</div>
     <div id="contents">
-      <div id="left-column"></div>
-      <div class="left-col"></div>
       <div id="content-main"><?php echo $this->layout()->content; ?></div>
       <div class="right-col"></div>
       <div id="right-column">
@@ -58,7 +56,13 @@
 		 
 	echo $form;
 
-?> 
+?><br />
+<?php if(!isset($userNamespace)): ?>
+	<a href="<?php echo $this->baseUrl(); ?>/user/create">Sing up</a><br />
+	<br />
+<?php endif; ?>
+	
+	<a href="<?php echo $this->baseUrl(); ?>/user" onclick="alert('User list will be here'); return false;">User list</a>
 	  </div>
     </div>
     <div class="clear"></div>
