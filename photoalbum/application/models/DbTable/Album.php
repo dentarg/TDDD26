@@ -20,7 +20,7 @@ class Application_Model_DbTable_Album extends Zend_Db_Table_Abstract
 			'name' => $name,
 			'date' => time(),
         );
-        $this->insert($data);
+        return $this->insert($data);
     }
     
     public function updateAlbum($id, $name, $cover)
