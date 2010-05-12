@@ -89,8 +89,6 @@ class UserController extends Zend_Controller_Action
              else
              {
                 $users->addUser($email, $password, $nickname);
-                
-                $users->addUser($email, $password, $nickname);
 
                 /* This is exactly the same code used in loginAction()
                    Yeah, I know, it's REALLY UGLY, you should not duplicate code */
@@ -181,7 +179,7 @@ class UserController extends Zend_Controller_Action
 	public function logoutAction()
 	{
 	   Zend_Auth::getInstance()->clearIdentity();
-	   $this->_helper->redirector('show'); // should redirect to index
+	   $this->_helper->redirector('index', 'album'); // should redirect to index
 	}
 	
 	public function updateAction()
