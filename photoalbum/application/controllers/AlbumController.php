@@ -49,11 +49,26 @@ class AlbumController extends Zend_Controller_Action
 			$formData = $this->getRequest()->getPost();
 			if ($form->isValid($formData)) 
 			{
-				$author = '1';
+				$auth = Zend_Auth::getInstance();
+				if($auth->hasIdentity()) 
+				{
+				   $identity = $auth->getIdentity();
+				
+				   // get user "object" by email
+				   // because that's what stored in $auth->getIdentity()
+				   $user = new Application_Model_DbTable_User();
+				   $user = $user->getUserByEmail($identity);
+				
+				   // do stuff
+				   //echo $user['nickname'];
+				   //echo $user['id'];
+				 }
+				 
+				$author = $user['id'];
 				$title = $form->getValue('title');
 				$albums = new Application_Model_DbTable_Album();
-				$albums->addAlbum($author, $title);
-				$this->_helper->redirector('index');
+				$newAlbumId = $albums->addAlbum($author, $title);
+				$this->_redirect('/photo/create/album/'.$newAlbumId);
 			} 
 			else 
 			{
@@ -97,7 +112,9 @@ class AlbumController extends Zend_Controller_Action
 			$albumModel->deleteAlbum($albumId);
 			
 		}	
-		$this->_helper->redirector('index');
+		
+		$this->_redirect("/public/user/show");
+		//$this->_helper->redirector('index');
 			//Deleting album and all pictures which belong to it
 	}
 }
