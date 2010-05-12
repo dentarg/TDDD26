@@ -64,15 +64,14 @@ function Imagedownload (frmId, url)
 <p>&nbsp;</p>
 <?php if ( $this->album['author'] == $this->userid ) {?>
 <div class="right-align">
-<a href="<?php echo $this->url(array('album'=>$this->album['id'],'controller'=>'photo','action'=>'create'));?>">Upload Photos</a> |
+<a href="<?php echo $this->baseUrl();?>/photo/create/album/<?php echo $this->album['id'];?>">Upload Photos</a> |
 
-<a href="<?php echo $this->url(array('controller'=>'album',
-'action'=>'update'));?>?id=<?php echo $this->album['id']; ?>" onclick="alert('This link will direct you to album editor page'); return false;">Edit album</a></div>
+<a href="<?php echo $this->baseUrl();?>/album/update/id/<?php echo $this->album['id'];?>" onclick="alert('This link will direct you to album editor page'); return false;">Edit album</a></div>
 <?php } ?>
 
 <?php if ( $this->album['author'] == $this->userid ) {?>
 <div class="left-align">
-<a href="<?php echo $this->url(array('album'=>$this->album['id'],'controller'=>'album','controller'=>'album','action'=>'delete'));?>">Delete Album</a>
+<a href="<?php echo $this->baseUrl();?>/album/delete/album/<?php echo $this->album['id'];?>">Delete Album</a>
 </div>
 <?php } ?>
 
