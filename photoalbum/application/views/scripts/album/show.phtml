@@ -11,7 +11,7 @@ $(function() {
 
 
 <div id="container">
-  <?php if ( count($this->albumPhoto) > 0 ) {?>
+  <?php if ( count($this->albumPhoto) > 0 ): ?>
   <div id="cpanel">
     <?php foreach($this->albumPhoto as $photo) : ?>
     <?php 
@@ -22,8 +22,8 @@ $(function() {
     </div>
     <?php endforeach; ?>
   </div>
-  <?php }else{?>
+  <?php else:?>
   No Photo Found.
-  <?php }?>
+  <?php endif;?>
   <div class="clear"  ></div>
 </div>
