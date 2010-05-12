@@ -11,6 +11,11 @@ class UserController extends Zend_Controller_Action
     public function indexAction()
     {
 		//User list
+       $this->view->title = "User list";
+       $this->view->headTitle($this->view->title);
+
+       $user = new Application_Model_DbTable_User();
+       $this->view->users = $user->fetchAll()->toArray();
     }
 
     public function showAction() 

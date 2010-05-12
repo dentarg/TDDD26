@@ -1,0 +1,21 @@
+<h2><?php echo $this->title;?></h2>
+
+<div id="container">
+
+<?php if(empty($this->users)): ?>
+	Website doesn't have registered users yet...
+<?php else: ?>
+
+<?php foreach($this->users as $user): ?>
+
+<div class="row">
+	<a href="<?php echo $this->url(array('controller'=>'user',
+'action'=>'show'));?>?id=<?php echo $user['id']; ?>"><?php echo $user['nickname']; ?></a>
+</div>
+
+<?php endforeach; ?>
+
+<?php endif; ?>
+    
+  <div class="clear"  ></div>
+</div>
