@@ -1,2 +1,4 @@
 .htaccess
 application.ini
+photoalbum/public/images/gallery
+photoalbum/public/phpthumb/cache

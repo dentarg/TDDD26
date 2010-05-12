@@ -68,6 +68,11 @@ class PhotoController extends Zend_Controller_Action
 	
 	public function createAction()
 	{
+		if(!$auth->hasIdentity()) 
+		{
+			$this->_redirect("/album");
+		}
+
 		$this->view->title = "Upload Photos";
 		$this->view->headTitle($this->view->title);
 
@@ -132,6 +137,11 @@ class PhotoController extends Zend_Controller_Action
 	
 	public function deleteAction()
 	{
+		if(!$auth->hasIdentity()) 
+		{
+			$this->_redirect("/album");
+		}
+
 		$picid = $this->getRequest()->getParam('pic');
 		$albumid = $this->getRequest()->getParam('album');
 		if ($picid)

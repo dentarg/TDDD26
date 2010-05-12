@@ -36,6 +36,12 @@ class AlbumController extends Zend_Controller_Action
 	
 	public function createAction()
 	{
+		if(!$auth->hasIdentity()) 
+		{
+			$this->_redirect("/album");
+		}
+		
+
 		$this->view->title = "Add new album";
 		$this->view->headTitle($this->view->title);
 
@@ -95,7 +101,7 @@ class AlbumController extends Zend_Controller_Action
 			   //echo $user['nickname'];
 			   //echo $user['id'];
 			 }
-		
+			
 			$this->view->userid = $user['id'];
 			
 			$id = $this->_getParam('id');
@@ -124,6 +130,11 @@ class AlbumController extends Zend_Controller_Action
 	
 	public function deleteAction()
 	{
+		if(!$auth->hasIdentity()) 
+		{
+			$this->_redirect("/public/user/show");
+		}
+		
 		$albumId = $this->getRequest()->getParam('album');
 		if ($albumId)
 		{
