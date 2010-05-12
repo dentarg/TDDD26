@@ -83,7 +83,7 @@ function Imagedownload (frmId, url)
 		$myURL = $this->url( array('controller'=>'photo','action'=>'download') );
 	?>
     <div class="icon">
-    <a onmouseout="settitle(this);" onclick="settitle(this);" title="<?php //echo $title;?>" onmouseover="removetitle(this);" href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span>
+    <a href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span>
     <br />
     <?php if ( $this->album['author'] == $this->userid ) {?>
     <span class="dPhoto" onclick="deletePic('<?php echo $this->album['id'];?>', '<?php echo $photo['id'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Delete</span>
