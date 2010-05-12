@@ -62,13 +62,14 @@ function Imagedownload (frmId, url)
 </script>
 <div id="breadcrumbs"><?php echo $this->title;?></div>
 <p>&nbsp;</p>
-<div class="right-align">
 <?php if ( $this->album['author'] == $this->userid ) {?>
+<div class="right-align">
 <a href="<?php echo $this->url(array('album'=>$this->album['id'],'controller'=>'photo','action'=>'create'));?>">Upload Photos</a> |
 
 <a href="<?php echo $this->url(array('controller'=>'album',
 'action'=>'update'));?>?id=<?php echo $this->album['id']; ?>" onclick="alert('This link will direct you to album editor page'); return false;">Edit album</a></div>
 <?php } ?>
+
 <?php if ( $this->album['author'] == $this->userid ) {?>
 <div class="left-align">
 <a href="<?php echo $this->url(array('album'=>$this->album['id'],'controller'=>'album','controller'=>'album','action'=>'delete'));?>">Delete Album</a>
@@ -84,10 +85,11 @@ function Imagedownload (frmId, url)
 	?>
     <div class="icon">
     <a onmouseout="settitle(this);" onclick="settitle(this);" title="<?php //echo $title;?>" onmouseover="removetitle(this);" href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span>
+    <br />
     <?php if ( $this->album['author'] == $this->userid ) {?>
-    <div class="dPhoto" onclick="deletePic('<?php echo $this->album['id'];?>', '<?php echo $photo['id'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Delete</div>
+    <span class="dPhoto" onclick="deletePic('<?php echo $this->album['id'];?>', '<?php echo $photo['id'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Delete</span>
     <?php }?>
-    <div class="dPhotoDelete" onclick="Imagedownload('<?php echo "myIFrm_".$photo['id'];?>', '<?php echo $myURL.'?imagefile='.$photo['picture'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Download</div>
+    <span class="dPhotoDelete" onclick="Imagedownload('<?php echo "myIFrm_".$photo['id'];?>', '<?php echo $myURL.'?imagefile='.$photo['picture'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Download</span>
     <iframe id="myIFrm_<?php echo $photo['id'];?>" src="" style="visibility:hidden;"></iframe>
     </a>
     </div>

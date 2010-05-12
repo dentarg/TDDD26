@@ -40,7 +40,7 @@ img{ border:none;}
 #cpanel div.icon   { position:relative; margin: 3px; vertical-align:text-bottom; }
 #cpanel div.icon a { 
 	display: block; float: left;
-	height: 130px !important;
+	height: 140px !important;
 	height: 100px; 
 	width: 148px !important;
 	width: 110px; 
@@ -106,5 +106,5 @@ ul.errors li { color: red; list-style-type: none; margin-left: -35px;}
 .float-left{ float:left;}
 .float-right{float:right;}
 
-.dPhoto{ position:absolute; z-index:100px;margin-top:-137px; cursor:default; display:none; margin-left:-8px;}
-.dPhotoDelete{ position:absolute; z-index:100px;margin-top:-137px; cursor:default; display:none; margin-left:90px;}
+.dPhoto{ position:absolute; z-index:100px;cursor:default; margin-left:-8px;}
+.dPhotoDelete{ position:absolute; z-index:100px;cursor:default; margin-left:90px;}
