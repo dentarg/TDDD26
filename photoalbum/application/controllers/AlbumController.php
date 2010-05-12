@@ -101,9 +101,10 @@ class AlbumController extends Zend_Controller_Action
 			   // do stuff
 			   //echo $user['nickname'];
 			   //echo $user['id'];
+			   $this->view->userid = $user['id'];
 			 }
 			
-			$this->view->userid = $user['id'];
+			
 			
 			$id = $this->_getParam('id');
 			$album = new Application_Model_DbTable_Album();
