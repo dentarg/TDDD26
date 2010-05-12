@@ -1,6 +1,6 @@
-<h2><?php echo $this->title;?></h2>
+<h2><?php echo $this->title;?> :: <?php echo $this->album['name'];?> </h2>
 
-<div class="right-align"><a href="<?php echo $this->url(array('id'=>$this->album['id'],'controller'=>'photo',
+<div class="right-align"><a href="<?php echo $this->url(array('id'=>$this->album['id'],'controller'=>'album',
 'action'=>'show'));?>">Back</a></div>
 
 <div class="left-align">
