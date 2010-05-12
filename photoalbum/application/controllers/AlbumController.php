@@ -114,7 +114,7 @@ class AlbumController extends Zend_Controller_Action
 			$user = new Application_Model_DbTable_User();
 			$user = $user->getUser($album['author']);
 			$this->view->title = '<a href="'.$this->view->url(array('controller'=>'user',
-	'show'=>'create')).'?id='.$album['author'].'">'.$user['nickname'].'</a> > '.$album['name'];
+	'action'=>'show')).'?id='.$album['author'].'">'.$user['nickname'].'</a> > '.$album['name'];
 	
 		
 			$albumPhoto = new Application_Model_DbTable_Photo();
