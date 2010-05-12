@@ -36,6 +36,7 @@ class AlbumController extends Zend_Controller_Action
 	
 	public function createAction()
 	{
+		$auth = Zend_Auth::getInstance();
 		if(!$auth->hasIdentity()) 
 		{
 			$this->_redirect("/album");
@@ -130,6 +131,7 @@ class AlbumController extends Zend_Controller_Action
 	
 	public function deleteAction()
 	{
+		$auth = Zend_Auth::getInstance();
 		if(!$auth->hasIdentity()) 
 		{
 			$this->_redirect("/public/user/show");
