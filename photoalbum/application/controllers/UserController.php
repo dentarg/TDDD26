@@ -35,18 +35,32 @@ class UserController extends Zend_Controller_Action
       else {
          // id set or logged in
          if(isset($id)) {
-            $id = $this->_getParam('id');
+			$userObject = $user;
             $user = $user->getUser($id);
+			if($auth->hasIdentity())
+			{
+				// Identity exists; get it
+				$identity = $auth->getIdentity();
+				// look up logged in user by email
+				$userObject = $userObject->getUserByEmail($identity);
+				
+				if($id == $userObject['id'])
+				{
+					$my_profile = true;
+					$this->view->my_profile = true;
+				}
+			}
          }
          // logged in and viewing own profile
-         else if($auth->hasIdentity()) {
+         elseif($auth->hasIdentity()) {
             // Identity exists; get it
             $identity = $auth->getIdentity();
             // look up logged in user by email
       		$user = $user->getUserByEmail($identity);
       		$this->view->user = $user;
+				
             $id = $user['id'];
-      		$my_profile = true;
+			$my_profile = true;
 			$this->view->my_profile = $my_profile;
          }
       }
