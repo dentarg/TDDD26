@@ -20,7 +20,9 @@ class UserController extends Zend_Controller_Action
       $id = $this->_getParam('id');
       $my_profile = false;
       $user = new Application_Model_DbTable_User();
+
       
+	
       if(!isset($id) && !$auth->hasIdentity()) {
          // not logged in and no id supplied, show nothing
          die("Not logged in."); // should redirect or something nicer
@@ -40,6 +42,7 @@ class UserController extends Zend_Controller_Action
       		$this->view->user = $user;
             $id = $user['id'];
       		$my_profile = true;
+			$this->view->my_profile = $my_profile;
          }
       }
 		// Title "user's profile" or "your profile"
