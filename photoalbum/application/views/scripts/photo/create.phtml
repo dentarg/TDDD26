@@ -1,6 +1,6 @@
 <h2><?php echo $this->title;?> :: <?php echo $this->album['name'];?> </h2>
 
-<div class="right-align"><a href="<?php echo $this->baseUrl();?>/album/show/id/<?php echo $this->album['id'];?>">Back</a></div>
+<div class="right-align"><a href="<?php echo $this->baseUrl();?>/album/show?id=<?php echo $this->album['id'];?>">Back</a></div>
 
 <div class="left-align">
 <?php if ($this->isUpload) { 
