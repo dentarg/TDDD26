@@ -102,4 +102,5 @@ img{ border:none;}
 .float-left{ float:left;}
 .float-right{float:right;}
 
-.dPhoto{ position:absolute; z-index:100px;margin-top:-137px; cursor:default; display:none;}
+.dPhoto{ position:absolute; z-index:100px;margin-top:-137px; cursor:default; display:none; margin-left:-8px;}
+.dPhotoDelete{ position:absolute; z-index:100px;margin-top:-137px; cursor:default; display:none; margin-left:90px;}

@@ -24,5 +24,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$this->view->jQuery()->enable()->uiEnable();
 	}
 
+   // to be able to create database adapters
+   protected function _initDatabaseRegistry()
+   {
+       $this->bootstrap("db");
+       $db = $this->getResource("db");
+       Zend_Registry::set('db', $db);
+       return $db;
+   }
 }
 

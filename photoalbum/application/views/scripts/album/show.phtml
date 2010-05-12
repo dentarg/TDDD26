@@ -18,7 +18,8 @@ $(function() {
 		$cover = ($photo['picture']) ? $photo['picture'] : 'noimage.png' ;
 	?>
     <div class="icon">
-    <a href="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $cover;?>&w=800&h=600"> <img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span></a>
+    <a href="<?php echo $this->url(array('controller'=>'photo',
+'action'=>'show'));?>"> <img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span></a>
     </div>
     <?php endforeach; ?>
   </div>
