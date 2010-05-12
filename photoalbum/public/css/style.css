@@ -106,5 +106,5 @@ ul.errors li { color: red; list-style-type: none; margin-left: -35px;}
 .float-left{ float:left;}
 .float-right{float:right;}
 
-.dPhoto{ position:absolute; z-index:100px;cursor:default; margin-left:-8px;}
-.dPhotoDelete{ position:absolute; z-index:100px;cursor:default; margin-left:90px;}
+.dPhoto{ position:absolute; z-index:100px;cursor: pointer; margin-top: 5px;}
+.dPhotoDelete{ position:relative; z-index:100px; right: -38px; cursor: pointer; margin-top: 5px;}
