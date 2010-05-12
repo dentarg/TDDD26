@@ -86,8 +86,6 @@ class UserController extends Zend_Controller_Action
              else
              {
                 $users->addUser($email, $password, $nickname);
-                
-                $users->addUser($email, $password, $nickname);
 
                 /* This is exactly the same code used in loginAction()
                    Yeah, I know, it's REALLY UGLY, you should not duplicate code */
