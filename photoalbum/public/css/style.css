@@ -98,6 +98,8 @@ img{ border:none;}
 
 .row { margin: 5px; }
 
+ul.errors li { color: red; list-style-type: none; margin-left: -35px;}
+
 #title-label label{ font-weight:bold; font-size:12px;}
 
 .manage{ position:absolute; width:160px; margin:-8px 0px 0px 8px;}
