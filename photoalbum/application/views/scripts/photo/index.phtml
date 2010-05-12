@@ -65,10 +65,10 @@ function Imagedownload (frmId, url)
 <div class="right-align">
 <?php if ( $this->album['author'] == $this->userid ) {?>
 <a href="<?php echo $this->url(array('album'=>$this->album['id'],'controller'=>'photo','action'=>'create'));?>">Upload Photos</a> |
-<?php } ?>
+
 <a href="<?php echo $this->url(array('controller'=>'album',
 'action'=>'update'));?>?id=<?php echo $this->album['id']; ?>" onclick="alert('This link will direct you to album editor page'); return false;">Edit album</a></div>
-
+<?php } ?>
 <?php if ( $this->album['author'] == $this->userid ) {?>
 <div class="left-align">
 <a href="<?php echo $this->url(array('album'=>$this->album['id'],'controller'=>'album','controller'=>'album','action'=>'delete'));?>">Delete Album</a>
