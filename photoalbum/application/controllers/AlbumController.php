@@ -135,7 +135,7 @@ class AlbumController extends Zend_Controller_Action
 		$auth = Zend_Auth::getInstance();
 		if(!$auth->hasIdentity()) 
 		{
-			$this->_redirect("/public/user/show");
+			$this->_redirect("/user/show");
 		}
 		
 		$albumId = $this->getRequest()->getParam('album');
@@ -146,7 +146,7 @@ class AlbumController extends Zend_Controller_Action
 			
 		}	
 		
-		$this->_redirect("/public/user/show");
+		$this->_redirect("/user/show");
 		//$this->_helper->redirector('index');
 			//Deleting album and all pictures which belong to it
 	}
