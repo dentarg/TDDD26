@@ -81,9 +81,28 @@ class AlbumController extends Zend_Controller_Action
 	{	
 		if($this->_hasParam('id'))
 		{
+			$auth = Zend_Auth::getInstance();
+			if($auth->hasIdentity()) 
+			{
+			   $identity = $auth->getIdentity();
+			
+			   // get user "object" by email
+			   // because that's what stored in $auth->getIdentity()
+			   $user = new Application_Model_DbTable_User();
+			   $user = $user->getUserByEmail($identity);
+			
+			   // do stuff
+			   //echo $user['nickname'];
+			   //echo $user['id'];
+			 }
+		
+			$this->view->userid = $user['id'];
+			
 			$id = $this->_getParam('id');
 			$album = new Application_Model_DbTable_Album();
 			$album = $album->getAlbum($id);
+			$this->view->album = $album;
+			
 			$user = new Application_Model_DbTable_User();
 			$user = $user->getUser($album['author']);
 			$this->view->title = '<a href="'.$this->view->url(array('controller'=>'user',
