@@ -1,4 +1,4 @@
-body{ margin:15px 0px 15px 0px; padding:0px; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:10px;}
+body{ margin:15px 0px 15px 0px; padding:0px; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:1em;}
 
 #outerDIv{ width:978px; margin:0 auto;}
 #innderDiv{ width:978px; background:url(../images/center-bk.png) repeat-y; }
@@ -17,10 +17,10 @@ form dd { margin-left: 10px;}
 
 .right-col{ position:absolute; background:url(../images/col_right.png) no-repeat;width:14px; height:276px; margin:120px 0px 0px 736px;}
 
-a:link {font-size: 11px; font-weight:bold; color: #009EE5;text-decoration: none;}
-a:visited {font-size: 11px; font-weight:bold; color: #009EE5; text-decoration: none;}
-a:hover { font-size: 11px; font-weight:bold; color: #009EE5; text-decoration: underline;}
-a:active { -size: 11px; font-weight:bold; color: #009EE5; text-decoration: underline;}
+a:link {       font-weight:bold; color: #009EE5;text-decoration: none;}
+a:visited {    font-weight:bold; color: #009EE5; text-decoration: none;}
+a:hover {      font-weight:bold; color: #009EE5; text-decoration: underline;}
+a:active {     font-weight:bold; color: #009EE5; text-decoration: underline;}
 
 h2{ color:#009EE5; margin:0px; padding:0px;}
 
