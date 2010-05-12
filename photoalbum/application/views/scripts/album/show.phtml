@@ -1,30 +1,93 @@
 <script type="text/javascript">
+
+baseURL = '<?php echo $this->baseUrl();?>';
+//$('#cpanel a').lightBox({
 $(function() {
-	$('#cpanel a').lightBox();
+	$('#cpanel a').lightBox({
+	imageLoading: '<?php echo $this->baseUrl();?>/images/lightbox-ico-loading.gif',
+	imageBtnClose: '<?php echo $this->baseUrl();?>/images/lightbox-btn-close.gif',
+	imageBtnPrev: '<?php echo $this->baseUrl();?>/images/lightbox-btn-prev.gif',
+	imageBtnNext: '<?php echo $this->baseUrl();?>/images/lightbox-btn-next.gif',
+   });
+
 });
+
+function settitle(thisEle)
+{
+	$(thisEle).attr('title', '<a href="#">Download</a>');
+	$(thisEle).children(".dPhoto").css("display", "none");
+	$(thisEle).children(".dPhotoDelete").css("display", "none");
+}
+function removetitle(thisEle)
+{
+	$(thisEle).attr('title', '');
+	$(thisEle).children(".dPhoto").css("display", "block");
+	$(thisEle).children(".dPhotoDelete").css("display", "block");
+}
+
+function removeHref(DivEle)
+{
+	 var parentTag = $(DivEle).parent();
+	 $(parentTag).attr("href", "javascript:void(0)")
+
+	$(parentTag).click(function (event) 
+	{ 
+		 event.preventDefault(); 
+		 //here you can also do all sort of things 
+	});
+}
+
+function setHref(DivEle, hrefValue)
+{
+	 var parentTag = $(DivEle).parent();
+	 $(parentTag).attr("href", hrefValue);
+
+	 $(parentTag).removeAttr('disabled');
+}
+
+function deletePic( albumId, picId  )
+{
+	setTimeout('$( "#jquery-overlay" ).click()', 0);
+	 URL = baseURL+'/photo/delete/pic/'+picId+'/album/'+albumId;
+	window.location = URL;
+}
+
+function Imagedownload (frmId, url)
+{
+	oIFrm = document.getElementById(frmId);
+	oIFrm.src = url;
+	setTimeout('$( "#jquery-overlay" ).click()', 0);
+}
+
 </script>
 <div id="breadcrumbs"><?php echo $this->title;?></div>
-
-
-<div class="right-align"><a href="<?php echo $this->url(array('controller'=>'album',
+<p>&nbsp;</p>
+<div class="right-align">
+<a href="<?php echo $this->url(array('album'=>$this->album['id'],'controller'=>'photo','action'=>'create'));?>">Upload Photos</a> |
+<a href="<?php echo $this->url(array('controller'=>'album',
 'action'=>'update'));?>?id=<?php echo $this->album['id']; ?>" onclick="alert('This link will direct you to album editor page'); return false;">Edit album</a></div>
 
-
+<div class="left-align">
+<a href="<?php echo $this->url(array('album'=>$this->album['id'],'controller'=>'album','controller'=>'album','action'=>'delete'));?>">Delete Album</a>
+</div>
 <div id="container">
-  <?php if ( count($this->albumPhoto) > 0 ): ?>
+  <?php if ( count($this->albumPhoto) > 0 ) {?>
   <div id="cpanel">
     <?php foreach($this->albumPhoto as $photo) : ?>
     <?php 
-		$cover = ($photo['picture']) ? $photo['picture'] : 'noimage.png' ;
+		$myURL = $this->url( array('controller'=>'photo','action'=>'download') );
 	?>
     <div class="icon">
-    <a href="<?php echo $this->url(array('controller'=>'photo',
-'action'=>'show'));?>"> <img src="<?php echo $this->baseUrl(); ?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span></a>
+    <a onmouseout="settitle(this);" onclick="settitle(this);" title="<?php //echo $title;?>" onmouseover="removetitle(this);" href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span>
+    <div class="dPhoto" onclick="deletePic('<?php echo $this->album['id'];?>', '<?php echo $photo['id'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Delete</div>
+    <div class="dPhotoDelete" onclick="Imagedownload('<?php echo "myIFrm_".$photo['id'];?>', '<?php echo $myURL.'?imagefile='.$photo['picture'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Download</div>
+    <iframe id="myIFrm_<?php echo $photo['id'];?>" src="" style="visibility:hidden;"></iframe>
+    </a>
     </div>
     <?php endforeach; ?>
   </div>
-  <?php else:?>
+  <?php }else{?>
   No Photo Found.
-  <?php endif;?>
+  <?php }?>
   <div class="clear"  ></div>
 </div>
