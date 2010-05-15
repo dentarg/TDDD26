@@ -11,7 +11,7 @@ class PhotoController extends Zend_Controller_Action
 
     public function indexAction()
     {
-		if($this->_hasParam('id'))
+		if($this->_hasParam('aid'))
 		{
 			$auth = Zend_Auth::getInstance();
 			if($auth->hasIdentity()) 
@@ -30,7 +30,7 @@ class PhotoController extends Zend_Controller_Action
 		
 			$this->view->userid = $user['id'];
 			
-			$id = $this->_getParam('id');
+			$id = $this->_getParam('aid');
 			$album = new Application_Model_DbTable_Album();
 			$album = $album->getAlbum($id);
 			$this->view->album = $album;
@@ -38,7 +38,7 @@ class PhotoController extends Zend_Controller_Action
 			$user = new Application_Model_DbTable_User();
 			$user = $user->getUser($album['author']);
 			$this->view->title = '<a href="'.$this->view->url(array('controller'=>'user',
-	'show'=>'create')).'?id='.$album['author'].'">'.$user['nickname'].'</a> > '.$album['name'];
+								'show'=>'create')).'?id='.$album['author'].'">'.$user['nickname'].'</a> > '.$album['name'];
 	
 		
 			$albumPhoto = new Application_Model_DbTable_Photo();
@@ -51,9 +51,9 @@ class PhotoController extends Zend_Controller_Action
 	
 	public function showAction()
 	{
-		if ( $this->_hasParam('id') )
+		if ( $this->_hasParam('aid') )
 		{
-			$id = $this->_getParam('id');
+			$id = $this->_getParam('aid');
 			$album = new Application_Model_DbTable_Album();
 			$this->view->album = $album = $album->getAlbum($id);
 
@@ -71,16 +71,22 @@ class PhotoController extends Zend_Controller_Action
 		$auth = Zend_Auth::getInstance();
 		if(!$auth->hasIdentity()) 
 		{
-			$this->_redirect("/album");
+			$this->_redirect("/index");
 		}
 
+		$albumid = $this->getRequest()->getParam('aid');
+		
+		if (!$albumid)
+		{
+			$this->_redirect("/index");
+		}
+		
 		$this->view->title = "Upload Photos";
 		$this->view->headTitle($this->view->title);
 
 		$form = new Application_Form_Photo();
 		$form->submit->setLabel('Upload');
 
-		$albumid = $this->getRequest()->getParam('album');
 		$album = new Application_Model_DbTable_Album();
 		$this->view->album = $album->getAlbum($albumid);
 
@@ -102,23 +108,42 @@ class PhotoController extends Zend_Controller_Action
 				$modelPhoto = new Application_Model_DbTable_Photo();
 				
 				$upload = new Zend_File_Transfer_Adapter_Http();
-				$upload->setDestination('images/gallery/');
+				$uploadDir = APPLICATION_PATH.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'public'.
+							 DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'gallery';
+							 
+				$upload->setDestination($uploadDir);
+				$upload->addValidator('Extension', false, array('jpg','jpeg', 'png', 'gif'));
+
 				$files = $upload->getFileInfo();
-					foreach ($files as $file => $info) 
+
+				foreach ($files as $file => $info) 
+				{
+					// file uploaded ?
+					if (!$upload->isUploaded($file) )continue;
+					// validators are ok ?
+					if (!$upload->isValid($file)) 
 					{
-						if($upload->isValid($file))
-						{
-							$count++;
-							$upload->receive($file);
-							
-							list ($picName, $extension) = explode('.',$info['name']);
-							//$picName.','. $info['name'].','. $albumid;
-							
-							$modelPhoto->addPhoto($picName, $info['name'], $albumid);
-						}
+						$this->view->msg .=  "Sorry <strong><u>Photo ". ($count+1) ."</u></strong> is of wrong format. Upload only jpg, jpeg, gif and png.<br/>";
+						continue;
 					}
+
+
+					$ext = $this->_findexts($info['name']);
+					$fileName = 'img_'.$count.time().".".$ext;	
+					$upload->addFilter('Rename',
+									   array('target' => $uploadDir.DIRECTORY_SEPARATOR.$fileName,
+											 'overwrite' => true));
+						
 					
-					$this->view->piccount = $count;
+					$upload->receive($info['name']);
+					list ($picName, $extension) = explode('.',$info['name']);
+					//$picName.','. $info['name'].','. $albumid;
+					$modelPhoto->addPhoto($picName, $fileName, $albumid);
+
+					$count++;
+				}					
+
+				$this->view->piccount = $count;
 			}
 		}		
 		
@@ -141,7 +166,7 @@ class PhotoController extends Zend_Controller_Action
 		$auth = Zend_Auth::getInstance();
 		if(!$auth->hasIdentity()) 
 		{
-			$this->_redirect("/album");
+			$this->_redirect("/index");
 		}
 
 		$picid = $this->getRequest()->getParam('pic');
@@ -152,9 +177,18 @@ class PhotoController extends Zend_Controller_Action
 			$photo->deletePhoto($picid);
 			
 		}
-		$this->_redirect('/photo/index/id/'.$albumid);
+		$this->_redirect("album/show/aid/".$albumid);
 		//$this->_helper->redirector('index');	
 		//Deleting picture and redirecting to album
+	}
+	
+	protected function _findexts($filename)
+	{
+		$filename = strtolower($filename) ;
+		$exts = split("[/\\.]", $filename) ;
+		$n = count($exts)-1;
+		$exts = $exts[$n];
+		return $exts;
 	}
 }
 

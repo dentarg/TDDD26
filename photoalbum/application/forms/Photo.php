@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Photo extends Zend_Form
+class Application_Form_Photo extends Zend_Dojo_Form
 {
 	public function init()
 	{

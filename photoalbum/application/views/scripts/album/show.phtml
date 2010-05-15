@@ -1,11 +1,7 @@
 <script type="text/javascript">
 
 baseURL = '<?php echo $this->baseUrl();?>';
-$(document).ready(function(){
-	$(".dPhoto").css("display", "none");
-	$(".dPhotoDelete").css("display", "none");
-});
-
+//$('#cpanel a').lightBox({
 $(function() {
 	$('#cpanel a').lightBox({
 	imageLoading: '<?php echo $this->baseUrl();?>/images/lightbox-ico-loading.gif',
@@ -51,9 +47,10 @@ function setHref(DivEle, hrefValue)
 
 function deletePic( albumId, picId  )
 {
-	if(!confirm('Are you sure you want to delete this picture?'));
-		return false;
-	setTimeout('$( "#jquery-overlay" ).click()', 0);
+	//setTimeout('$( "#jquery-overlay" ).click()', 0);
+	cDelete = confirm ("Do you really want to delete image?");
+	if ( cDelete == false )return;
+  	
 	 URL = baseURL+'/photo/delete/pic/'+picId+'/album/'+albumId;
 	window.location = URL;
 }
@@ -65,22 +62,24 @@ function Imagedownload (frmId, url)
 	setTimeout('$( "#jquery-overlay" ).click()', 0);
 }
 
+function deleteAlbum(URL)
+{
+	cDelete = confirm ("Do you really want to delete album?");
+	if ( cDelete == false )return false;
+	window.location = URL;
+	
+}
+
 </script>
+
 <div id="breadcrumbs"><?php echo $this->title;?></div>
 <p>&nbsp;</p>
 <?php if ( $this->album['author'] == $this->userid ) {?>
-<div class="right-align">
-<a href="<?php echo $this->baseUrl();?>/photo/create/album/<?php echo $this->album['id'];?>">Upload Photos</a> |
-
-<a href="<?php echo $this->baseUrl();?>/album/update/id/<?php echo $this->album['id'];?>" onclick="alert('This link will direct you to album editor page'); return false;">Edit album</a></div>
+<div class="right-align"> <a href="<?php echo $this->baseUrl();?>/photo/create/aid/<?php echo $this->album['id'];?>">Upload Photos</a> | <a href="<?php echo $this->baseUrl();?>/album/update/aid/<?php echo $this->album['id'];?>">Edit album</a></div>
 <?php } ?>
-
 <?php if ( $this->album['author'] == $this->userid ) {?>
-<div class="left-align">
-<a href="<?php echo $this->baseUrl();?>/album/delete/album/<?php echo $this->album['id'];?>" onclick="return confirm('Are you sure you want to delete this album?');">Delete Album</a>
-</div>
+<div class="left-align"> <a href="javascript:void(0);" onclick="deleteAlbum('<?php echo $this->baseUrl();?>/album/delete/aid/<?php echo $this->album['id'];?>');">Delete Album</a> </div>
 <?php } ?>
-
 <div id="container">
   <?php if ( count($this->albumPhoto) > 0 ) {?>
   <div id="cpanel">
@@ -89,16 +88,14 @@ function Imagedownload (frmId, url)
 		$myURL = $this->url( array('controller'=>'photo','action'=>'download') );
 	?>
     <div class="icon">
-    <a href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span>
-    <br />
-    <?php if ( $this->album['author'] == $this->userid ) {?>
-    <span class="dPhoto" onclick="deletePic('<?php echo $this->album['id'];?>', '<?php echo $photo['id'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Delete</span>
-    <?php }?>
-    <span class="dPhotoDelete" onclick="Imagedownload('<?php echo "myIFrm_".$photo['id'];?>', '<?php echo $myURL.'?imagefile='.$photo['picture'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');">Download</span>
-    <iframe id="myIFrm_<?php echo $photo['id'];?>" src="" style="visibility:hidden;"></iframe>
-    <br />
-    </a>
-    </div>
+      <?php if ( $this->album['author'] == $this->userid ) {?>
+      <div class="dPhoto" onclick="deletePic('<?php echo $this->album['id'];?>', '<?php echo $photo['id'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');"><img title="delete" alt="X" src="<?=$this->baseUrl();?>/images/delete-icon.png" /></div>
+      <?php }?>
+      <div class="dPhotoDelete" onclick="Imagedownload('<?php echo "myIFrm_".$photo['id'];?>', '<?php echo $myURL.'?imagefile='.$photo['picture'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');"><img title="download" alt="&dArr;" src="<?=$this->baseUrl();?>/images/download_icon.jpg" /></div>
+      <a href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span> <br />
+      <iframe id="myIFrm_<?php echo $photo['id'];?>" src="" style="visibility:hidden;"></iframe>
+      <br />
+      </a> </div>
     <?php endforeach; ?>
   </div>
   <?php }else{?>

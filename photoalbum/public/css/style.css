@@ -37,9 +37,7 @@ h2{ color:#009EE5; margin:0px; padding:0px;}
 img{ border:none;}
 #cpanel {  text-align: center;  vertical-align: middle; }
 
-#cpanel div.icon   { position:relative; margin: 3px; vertical-align:text-bottom; }
-#cpanel div.icon a { 
-	display: block; float: left;
+#cpanel div.icon   { 	display: block; float: left;
 	height: 140px !important;
 	height: 100px; 
 	width: 148px !important;
@@ -49,45 +47,22 @@ img{ border:none;}
 	border: 1px solid #DDD;
 	margin:5px;
 	padding: 2px 5px 1px 5px;
+	margin-bottom:20px;
+}
+#cpanel div.icon a { 
+color : #009EE5;  
+text-decoration:none;
 }
 
-#cpanel div.icon a:link    {  color : #009EE5;  }
-#cpanel div.icon a:hover   { 
+#cpanel div.icon:hover   { 
 	color : #009EE5; 
 	border: 1px solid #009EE5;
 	padding: 3px 4px 0px 6px; 
 }
-#cpanel div.icon a:active  {  color : #009EE5;  }
-#cpanel div.icon a:visited {  color : #009EE5;  }
 
 #cpanel div.icon img { margin-top: 3px; margin-left:2px; }
 #cpanel div.icon span { margin-top:3px;}
 
-/* For Pictures */
-#cpanel div.icon_picture   { margin: 3px; }
-#cpanel div.icon_picture a { 
-	display: block; float: left;
-	height: 125px !important;
-	height: 125px; 
-	width: 157px !important;
-	width: 157px; 
-	vertical-align: middle; 
-	text-decoration : none;
-	border: 1px solid #999999;
-	padding: 2px 5px 1px 5px;
-}
-
-#cpanel div.icon_picture a:link    { color : #009EE5; }
-#cpanel div.icon_picture a:hover   { 
-	color : #FFFFFF; 
-	border: 1px solid #009EE5;
-	padding: 3px 4px 0px 6px; 
-}
-#cpanel div.icon_picture a:active  { color : #009EE5;}
-#cpanel div.icon_picture a:visited { color : #009EE5;}
-
-#cpanel div.icon_picture img { margin-top: 6px; margin-left:0px; }
-#cpanel div.icon_picture span { display: block; padding-top: 3px;}
 
 .transparent
 {
@@ -106,5 +81,5 @@ ul.errors li { color: red; list-style-type: none; margin-left: -35px;}
 .float-left{ float:left;}
 .float-right{float:right;}
 
-.dPhoto{ position:absolute; z-index:100px;cursor: pointer; margin-top: 5px;}
-.dPhotoDelete{ position:relative; z-index:100px; right: -38px; cursor: pointer; margin-top: 5px;}
+.dPhoto{ position:absolute; z-index:100px;cursor:default; width:13px; height:13px; margin-left:10px; margin-top:-21px; }
+.dPhotoDelete{ position:absolute; z-index:100px;cursor:default;margin-left:-8px; margin-top:-21px; width:13px; height:14px;}
