@@ -1,15 +1,22 @@
 <h2><?php echo $this->title;?> :: <?php echo $this->album['name'];?> </h2>
-
-<div class="right-align"><a href="<?php echo $this->baseUrl();?>/album/show?id=<?php echo $this->album['id'];?>">Back</a></div>
+<p></p>
+<div class="right-align"><a href="<?php echo $this->baseUrl();?>/album/show/aid/<?php echo $this->album['id'];?>">Back</a></div>
 
 <div class="left-align">
 <?php if ($this->isUpload) { 
 		$msg = ($this->piccount) ?'<font style="color:#33CC00;">'.$this->piccount.' Picture(s) have been uploaded.</font>':
 		'<font style="color:#FF0000;">'.$this->piccount.' Picture(s) have been uploaded.</font>';
 		echo $msg;
+
+if ($this->msg)		
+{
+	echo '<br>';
+	echo '<font style="color:#FF0000;">'.$this->msg.'</font>';
+}		
 }?>
 </div>
 
 <div id="container">
+
 <?php echo $this->form ;?>
 </div>

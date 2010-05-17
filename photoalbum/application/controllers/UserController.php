@@ -10,10 +10,9 @@ class UserController extends Zend_Controller_Action
 
     public function indexAction()
     {
-		//User list
+     //User list
        $this->view->title = "User list";
        $this->view->headTitle($this->view->title);
-
        $user = new Application_Model_DbTable_User();
        $this->view->users = $user->fetchAll()->toArray();
     }
@@ -35,19 +34,20 @@ class UserController extends Zend_Controller_Action
       else {
          // id set or logged in
          if(isset($id)) {
-			$userObject = $user;
+		 	$userObject = $user;
+            $id = $this->_getParam('id');
             $user = $user->getUser($id);
+			
 			if($auth->hasIdentity())
 			{
 				// Identity exists; get it
 				$identity = $auth->getIdentity();
 				// look up logged in user by email
 				$userObject = $userObject->getUserByEmail($identity);
-				
 				if($id == $userObject['id'])
 				{
-					$my_profile = true;
-					$this->view->my_profile = true;
+				  $my_profile = true;
+				  $this->view->my_profile = true;
 				}
 			}
          }
@@ -58,9 +58,8 @@ class UserController extends Zend_Controller_Action
             // look up logged in user by email
       		$user = $user->getUserByEmail($identity);
       		$this->view->user = $user;
-				
             $id = $user['id'];
-			$my_profile = true;
+      		$my_profile = true;
 			$this->view->my_profile = $my_profile;
          }
       }
@@ -75,7 +74,11 @@ class UserController extends Zend_Controller_Action
 			   ->joinLeft('photo', 'photo.id = album.cover', 'photo.picture')
 			   ->order('album.date DESC')
 			   ->where("author = ".$id);
-		$this->view->albums = $album->fetchAll($select)->toArray();
+		
+		   
+		$albums = $album->fetchAll($select)->toArray();
+		$albums = $album->setCover( $albums );
+		$this->view->albums = $albums;
 
 		$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper'); //Register jquery for the view         
     }

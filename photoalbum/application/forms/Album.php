@@ -6,6 +6,9 @@ class Application_Form_Album extends Zend_Form
 	{
 		$this->setName('album');
 
+		$id = new Zend_Form_Element_Hidden('id');
+		$id->addFilter('Int');
+		
 		$title = new Zend_Form_Element_Text('title');
 
 		$title->setLabel('Album Title:')

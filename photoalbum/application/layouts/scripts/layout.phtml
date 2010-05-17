@@ -32,6 +32,10 @@ if ($auth->hasIdentity()):
 
     <a href="<?php echo $this->baseUrl(); ?>/user/show">My profile</a><br />
     <br />
+    
+    <a href="<?php echo $this->url(array('controller'=>'album',
+    'action'=>'create'));?>">Create album</a><br />
+    <br />
 
     <a href="<?php echo $this->baseUrl(); ?>/user/logout">Log out</a><br />
     <br />

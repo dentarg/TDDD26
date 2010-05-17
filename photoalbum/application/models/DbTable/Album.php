@@ -48,5 +48,26 @@ class Application_Model_DbTable_Album extends Zend_Db_Table_Abstract
 		
 		return($results);
     }
+
+	public function setCover( $albums )
+    {
+		$photo = new Application_Model_DbTable_Photo();
+
+		foreach ( $albums as $key => $album )
+		{
+			if ( !$album['picture'] )
+			{
+				$photos = $photo->getAlbumPhoto( $album['id'] );
+
+				if ( count ($photos) > 0 )
+				{
+					$this->updateAlbum($album['id'], $album['name'], $photos[0]['id']);
+					$albums[$key]['picture'] = $photos[0]['picture'];
+				}
+			}
+		}
+		
+		return $albums;
+    }
 }
 ?>

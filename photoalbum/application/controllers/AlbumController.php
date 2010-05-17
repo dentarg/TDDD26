@@ -18,8 +18,9 @@ class AlbumController extends Zend_Controller_Action
 			   ->order('album.date DESC')
 			   ->limit(20, 0);
 		
-		$this->view->albums = $album->fetchAll($select);
-	   
+		$albums = $album->fetchAll($select)->toArray();
+		$albums = $album->setCover( $albums );
+		$this->view->albums = $albums;
 		//$rows = $table->fetchAll($select);
 		
 		
@@ -39,7 +40,7 @@ class AlbumController extends Zend_Controller_Action
 		$auth = Zend_Auth::getInstance();
 		if(!$auth->hasIdentity()) 
 		{
-			$this->_redirect("/album");
+			$this->_redirect("/index");
 		}
 		
 
@@ -75,7 +76,7 @@ class AlbumController extends Zend_Controller_Action
 				$title = $form->getValue('title');
 				$albums = new Application_Model_DbTable_Album();
 				$newAlbumId = $albums->addAlbum($author, $title);
-				$this->_redirect('/photo/create/album/'.$newAlbumId);
+				$this->_redirect('/photo/create/aid/'.$newAlbumId);
 			} 
 			else 
 			{
@@ -86,7 +87,7 @@ class AlbumController extends Zend_Controller_Action
 	
 	public function showAction()
 	{	
-		if($this->_hasParam('id'))
+		if($this->_hasParam('aid'))
 		{
 			$auth = Zend_Auth::getInstance();
 			if($auth->hasIdentity()) 
@@ -106,15 +107,16 @@ class AlbumController extends Zend_Controller_Action
 			
 			
 			
-			$id = $this->_getParam('id');
+			$id = $this->_getParam('aid');
 			$album = new Application_Model_DbTable_Album();
 			$album = $album->getAlbum($id);
 			$this->view->album = $album;
 			
 			$user = new Application_Model_DbTable_User();
 			$user = $user->getUser($album['author']);
-			$this->view->title = '<a href="'.$this->view->url(array('controller'=>'user',
-	'action'=>'show')).'?id='.$album['author'].'">'.$user['nickname'].'</a> > '.$album['name'];
+			
+			$baseURL = new Zend_View_Helper_BaseUrl();
+			$this->view->title = '<a href="'.$baseURL->baseUrl().'/user/show/id/'.$album['author'].'">'.$user['nickname'].'</a> > '.$album['name'];
 	
 		
 			$albumPhoto = new Application_Model_DbTable_Photo();
@@ -127,7 +129,44 @@ class AlbumController extends Zend_Controller_Action
 	
 	public function updateAction()
 	{
-		//Updating album
+		$auth = Zend_Auth::getInstance();
+		if(!$auth->hasIdentity()) 
+		{
+			$this->_redirect("/index");
+		}
+
+		$id = $this->_getParam('aid', 0);
+		
+		if ( $id > 0 )
+		{
+			$form = new Application_Form_Album();
+			$form->submit->setLabel('Update');
+
+			$albumModel = new Application_Model_DbTable_Album();
+			$album = $albumModel->getAlbum($id);
+
+			$this->view->title = "Update album :: ".$album['name'];
+			$this->view->headTitle($this->view->title);
+
+
+			if ($this->getRequest()->isPost()) 
+			{
+				$formData = $this->getRequest()->getPost();
+				if ($form->isValid($formData)) 
+				{
+					$title = $form->getValue('title');
+					$cover = $album['cover'];
+					$albumModel->updateAlbum($id, $title, $cover);
+					$this->_redirect('/album/show/aid/'.$id);
+				}
+			}
+			$this->view->album = $album;
+			$this->view->form = $form;
+
+			$data = array("id"=>$id, 'title' => $album['name']);
+			$form->populate($data);
+		}
+
 	}
 	
 	public function deleteAction()
@@ -135,10 +174,10 @@ class AlbumController extends Zend_Controller_Action
 		$auth = Zend_Auth::getInstance();
 		if(!$auth->hasIdentity()) 
 		{
-			$this->_redirect("/user/show");
+			$this->_redirect("/index");
 		}
 		
-		$albumId = $this->getRequest()->getParam('album');
+		$albumId = $this->getRequest()->getParam('aid');
 		if ($albumId)
 		{
 			$albumModel = new Application_Model_DbTable_Album();
