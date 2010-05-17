@@ -21,13 +21,27 @@ if (!$filename)
 else 
 {
 	// define the path to your download folder plus assign the file name
-	echo $path = $filePath.$filename;
+	$path = $filePath.$filename;
 	// check that file exists and is readable
 	if (file_exists($path) && is_readable($path)) 
 	{
 		// get the file size and send the http headers
 		$size = filesize($path);
-		header('Content-Type: application/octet-stream');
+		$filetype = strtolower(end(explode('.', $filename)));
+		switch($filetype) {
+		    case 'jpg':
+		    case 'jpeg':
+		        header('Content-Type: image/jpg');
+		        break;
+		    case 'png':
+		        header('Content-Type: image/png');
+		        break;
+		    case 'gif':
+		        header('Content-Type: image/gif');
+		        break;
+		    default:
+		        die("Content-Type error");
+		}
 		header('Content-Length: '.$size);
 		header('Content-Disposition: attachment; filename='.$filename);
 		header('Content-Transfer-Encoding: binary');
