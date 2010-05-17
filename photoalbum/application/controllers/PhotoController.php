@@ -69,17 +69,22 @@ class PhotoController extends Zend_Controller_Action
 	public function createAction()
 	{
 		$auth = Zend_Auth::getInstance();
-		if(!$auth->hasIdentity()) 
+		
+		$albumid = $this->getRequest()->getParam('aid');
+		
+		if(!$albumid || !$auth->hasIdentity()) 
 		{
 			$this->_redirect("/index");
 		}
 
-		$albumid = $this->getRequest()->getParam('aid');
+		$album = new Application_Model_DbTable_Album();
+		$user = new Application_Model_DbTable_User();
+		$identity = $auth->getIdentity();
+		$user = $user->getUserByEmail($identity);
 		
-		if (!$albumid)
-		{
+		if(!$album->fetchRow("id=".$albumid." AND author=".$user['id']))
 			$this->_redirect("/index");
-		}
+		
 		
 		$this->view->title = "Upload Photos";
 		$this->view->headTitle($this->view->title);
@@ -87,7 +92,6 @@ class PhotoController extends Zend_Controller_Action
 		$form = new Application_Form_Photo();
 		$form->submit->setLabel('Upload');
 
-		$album = new Application_Model_DbTable_Album();
 		$this->view->album = $album->getAlbum($albumid);
 
 		$this->view->form = $form;

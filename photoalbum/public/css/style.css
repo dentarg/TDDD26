@@ -37,9 +37,7 @@ h2{ color:#009EE5; margin:0px; padding:0px;}
 img{ border:none;}
 #cpanel {  text-align: center;  vertical-align: middle; }
 
-#cpanel div.icon   { 	
-	display: block; float: left;
-	position:relative; margin: 3px; vertical-align:text-bottom;
+#cpanel div.icon   { 	display: block; float: left;
 	height: 140px !important;
 	height: 100px; 
 	width: 148px !important;
@@ -54,7 +52,6 @@ img{ border:none;}
 #cpanel div.icon a { 
 color : #009EE5;  
 text-decoration:none;
-display: block; float: left; 
 }
 
 #cpanel div.icon:hover   { 
@@ -84,10 +81,5 @@ ul.errors li { color: red; list-style-type: none; margin-left: -35px;}
 .float-left{ float:left;}
 .float-right{float:right;}
 
-<<<<<<< HEAD
-.dPhoto{ position:absolute; z-index:100px; margin-left: -15px; cursor: pointer; font-size: 12px;}
-.dPhotoDelete{ position:relative; z-index:100px; margin-left: 50px; cursor: pointer; font-size: 12px;}
-=======
 .dPhoto{ position:absolute; z-index:100px;cursor:default; width:13px; height:13px; margin-left:10px; margin-top:-21px; }
 .dPhotoDelete{ position:absolute; z-index:100px;cursor:default;margin-left:-8px; margin-top:-21px; width:13px; height:14px;}
->>>>>>> 96a241c2a98365a3dd6c38e145b260a218eea224
