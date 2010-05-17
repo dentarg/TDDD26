@@ -1,10 +1,11 @@
 <script type="text/javascript">
 
 baseURL = '<?php echo $this->baseUrl();?>';
-$(document).ready(function(){
+//$('#cpanel a').lightBox({
+/*$(document).ready(function(){
 	$(".dPhoto").css("display", "none");
 	$(".dPhotoDelete").css("display", "none");
-});
+});*/
 
 $(function() {
 	$('#cpanel a').lightBox({
@@ -18,6 +19,7 @@ $(function() {
 
 function settitle(thisEle)
 {
+	alert('Whaaa');
 	$(thisEle).attr('title', '<a href="#">Download</a>');
 	$(thisEle).children(".dPhoto").css("display", "none");
 	$(thisEle).children(".dPhotoDelete").css("display", "none");

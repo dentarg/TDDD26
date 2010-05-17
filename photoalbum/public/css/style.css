@@ -37,7 +37,7 @@ h2{ color:#009EE5; margin:0px; padding:0px;}
 img{ border:none;}
 #cpanel {  text-align: center;  vertical-align: middle; }
 
-#cpanel div.icon   { position:relative; margin: 3px; vertical-align:text-bottom; }
+#cpanel div.icon   { position:relative; margin: 3px; vertical-align:text-bottom;}
 #cpanel div.icon a { 
 	display: block; float: left;
 	height: 140px !important;
@@ -106,5 +106,5 @@ ul.errors li { color: red; list-style-type: none; margin-left: -35px;}
 .float-left{ float:left;}
 .float-right{float:right;}
 
-.dPhoto{ position:absolute; z-index:100px;cursor: pointer; margin-top: 5px;}
-.dPhotoDelete{ position:relative; z-index:100px; right: -38px; cursor: pointer; margin-top: 5px;}
+.dPhoto{ position:absolute; z-index:100px; margin-left: -15px; cursor: pointer; font-size: 12px;}
+.dPhotoDelete{ position:relative; z-index:100px; margin-left: 50px; cursor: pointer; font-size: 12px;}
