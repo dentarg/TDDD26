@@ -107,7 +107,7 @@ class UserController extends Zend_Controller_Action
              // from Ivan 25036c5d28e0a5fb93602bcb4a163ed1969635f0
              $existing = count($users->fetchAll("email = '".$email."'")->toArray());
              if($existing)
-                $this->view->form->email->addError("Email already exists");
+                $this->view->form->email->addError("Username already exists");
              else
              {
                 $users->addUser($email, $password, $nickname);
