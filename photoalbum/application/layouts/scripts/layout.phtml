@@ -53,7 +53,7 @@ else:
     		 ->addValidator('regex', false, array('/^[a-z]+/'))
     		 ->addValidator('stringLength', false, array(6, 20))
     		 ->setRequired(true)
-    		 ->setLabel('Email')
+    		 ->setLabel('Username')
     		 ->addFilter('StringToLower');
     
     $password = $form->createElement('password', 'password');

@@ -73,6 +73,14 @@ function deleteAlbum(URL)
 
 </script>
 
+<?php
+function shortName($str)
+{
+    $limit = 10;
+    return ucwords(substr($str, 0, $limit) . (strlen($str) > $limit ? "..." : ""));
+}
+?>          
+
 <div id="breadcrumbs"><?php echo $this->title;?></div>
 <p>&nbsp;</p>
 <?php if ( $this->album['author'] == $this->userid ) {?>
@@ -93,7 +101,9 @@ function deleteAlbum(URL)
       <div class="dPhoto" onclick="deletePic('<?php echo $this->album['id'];?>', '<?php echo $photo['id'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');"><img title="delete" alt="X" src="<?=$this->baseUrl();?>/images/delete-icon.png" /></div>
       <?php }?>
       <div class="dPhotoDelete" onclick="Imagedownload('<?php echo "myIFrm_".$photo['id'];?>', '<?php echo $myURL.'?imagefile='.$photo['picture'];?>');" onmouseover="removeHref(this);" onmouseout="setHref(this,'<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600');"><img title="download" alt="&dArr;" src="<?=$this->baseUrl();?>/images/download_icon.jpg" /></div>
-      <a href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> <span><?php echo ucwords($photo['name'])?></span> <br />
+      <a href="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=800&h=600"> <img src="<?=$this->baseUrl();?>/phpthumb/phpThumb.php?src=../images/gallery/<?php echo $photo['picture'];?>&w=140&h=110" /> 
+          
+          <span><?php echo shortName($photo['name'])?></span> <br />
       <iframe id="myIFrm_<?php echo $photo['id'];?>" src="" style="visibility:hidden;"></iframe>
       <br />
       </a> </div>

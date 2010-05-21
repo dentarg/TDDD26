@@ -7,14 +7,14 @@ class Application_Form_User extends Zend_Form
         $this->setName('user');
 
         $email = new Zend_Form_Element_Text('email');
-        $email->setLabel('Email')
+        $email->setLabel('Username')
             ->setRequired(true)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
             ->addValidator('NotEmpty');
 
         $nickname = new Zend_Form_Element_Text('nickname');
-        $nickname->setLabel('Nickname')
+        $nickname->setLabel('Real name')
             ->setRequired(true)
             ->addFilter('StripTags')
             ->addFilter('StringTrim')
